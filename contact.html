@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>문의하기 | 아바홈히어랜나우</title>
+<meta name="description" content="아바홈히어랜나우 문의 및 사역 협력 문의, 후원 안내.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@500;600&family=Noto+Sans+Sinhala:wght@400;500;600&family=Noto+Serif+Sinhala:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="contact">
+
+<div class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Contact &amp; Support</span>
+    <h1 data-i18n="c.h1">문의 및 후원 안내</h1>
+    <p data-i18n="c.p">예배 참석, 사역 참여, 협력과 후원에 관한 어떤 이야기든 편하게 남겨주세요. 남겨주신 내용은 바로 아바홈 메일로 전달됩니다.</p>
+  </div>
+</div>
+
+<section style="padding-top:70px">
+  <div class="wrap contact-grid">
+    <div>
+      <dl class="info-list">
+        <div><dt data-i18n="c.addr">주소</dt><dd data-i18n="addr">경기도 안산시 상록구 석호로 229-1 (2층)</dd></div>
+        <div><dt data-i18n="c.worship">목요열방예배</dt><dd><span data-i18n="c.time">매주 목요일 오후 7:30</span><br><span style="color:var(--muted);font-weight:400" data-i18n="c.meal">식사 제공 오후 6:30부터</span></dd></div>
+        <div><dt data-i18n="c.leader">대표</dt><dd data-i18n="leader.name">남동현 목사</dd></div>
+        <div><dt data-i18n="c.phone">전화</dt><dd><a href="tel:01087839253">010-8783-9253</a></dd></div>
+        <div><dt data-i18n="c.email">이메일</dt><dd><a href="mailto:abbahomeherennow@gmail.com">abbahomeherennow@gmail.com</a></dd></div>
+      </dl>
+      <div class="support-card">
+        <h4 data-i18n="c.sup.h">후원 안내</h4>
+        <p data-i18n="c.sup.p">여러분의 기도와 후원은 다문화 이웃을 섬기는 식탁과 예배, 아이들과 리더들을 세우는 일에 사용됩니다.</p>
+        <div class="acct"><span data-i18n="c.bank">우리은행 1005-804-736600</span><button class="copy" data-copy="1005804736600">복사</button></div>
+      </div>
+      <p style="margin-top:22px"><a class="link-arrow" target="_blank" rel="noopener" href="https://map.naver.com/p/search/%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%83%81%EB%A1%9D%EA%B5%AC%20%EC%84%9D%ED%98%B8%EB%A1%9C%20229-1" data-i18n="c.map">네이버 지도에서 보기 →</a></p>
+    </div>
+
+    <form class="form-card" id="contact-form" novalidate>
+      <div class="type-switch">
+        <label><input type="radio" name="type" value="general" checked><span data-i18n="f.general">일반 문의</span></label>
+        <label><input type="radio" name="type" value="coop"><span data-i18n="btn.coop">사역 협력 문의</span></label>
+      </div>
+      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off">
+      <div class="fields">
+        <div class="field"><label for="name"><span data-i18n="f.name">이름</span> <i>*</i></label><input id="name" name="name" required></div>
+        <div class="field"><label for="phone" data-i18n="f.phone">연락처</label><input id="phone" name="phone" inputmode="tel" placeholder="010-0000-0000"></div>
+        <div class="field full"><label for="email"><span data-i18n="f.email">이메일</span> <i>*</i></label><input id="email" name="email" type="email" required placeholder="답변 받으실 이메일" data-i18n-ph="f.emailPh"></div>
+        <div class="field coop-only"><label for="org" data-i18n="f.org">소속 / 단체·교회</label><input id="org" name="org"></div>
+        <div class="field coop-only"><label for="area" data-i18n="f.area">협력 희망 분야</label>
+          <select id="area" name="area">
+            <option value="">선택해주세요</option>
+            <option>목요열방예배</option>
+            <option>아바홈탕탕스쿨</option>
+            <option>기쁨의 학교</option>
+            <option>선교리더십코칭</option>
+            <option>다민족교회 섬김</option>
+            <option>후원 / 물품 지원</option>
+            <option>자원봉사</option>
+            <option>기타</option>
+          </select>
+        </div>
+        <div class="field full"><label for="subject"><span data-i18n="f.subject">제목</span> <i>*</i></label><input id="subject" name="subject" required></div>
+        <div class="field full"><label for="message"><span data-i18n="f.message">내용</span> <i>*</i></label><textarea id="message" name="message" required></textarea></div>
+      </div>
+      <label class="consent"><input type="checkbox" required> <span data-i18n="f.consent">문의 답변을 위해 이름·연락처·이메일을 수집하는 것에 동의합니다. (답변 후 지체 없이 파기)</span></label>
+      <div class="form-foot">
+        <small data-i18n="f.req">* 필수 입력 항목</small>
+        <button class="btn btn-dark" type="submit">문의 보내기</button>
+      </div>
+      <div class="form-status" id="form-status" role="status"></div>
+    </form>
+  </div>
+</section>
+
+<script src="data.js"></script>
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+<script>
+  // 필수 항목 간단 검사
+  document.getElementById("contact-form").addEventListener("submit", function (e) {
+    if (!this.checkValidity()) { e.stopImmediatePropagation(); e.preventDefault(); this.reportValidity(); }
+  }, true);
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>사역소식 | 아바홈히어랜나우</title>
+<meta name="description" content="아바홈히어랜나우의 사역 현장 소식과 사진.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@500;600&family=Noto+Sans+Sinhala:wght@400;500;600&family=Noto+Serif+Sinhala:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="news">
+
+<div class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Ministry News</span>
+    <h1 data-i18n="home.news.h2">사역 소식</h1>
+    <p data-i18n="news.p">현장에서 함께 웃고, 먹고, 예배한 이야기들을 나눕니다. 사역별로 골라 보실 수 있어요.</p>
+  </div>
+</div>
+
+<section style="padding-top:60px">
+  <div class="wrap">
+    <div class="board-bar">
+      <div class="board-tabs" id="tabs"></div>
+      <div class="view-toggle"><button data-v="card">카드</button><button data-v="list">목록</button></div>
+    </div>
+    <div id="posts" class="posts"></div>
+  </div>
+</section>
+
+<section class="gallery">
+  <div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Gallery</span><h2 data-i18n="home.gal.h2">함께한 순간들</h2></div></div>
+    <div class="gal-grid" id="gallery"></div>
+  </div>
+</section>
+
+<script src="data.js"></script>
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
