@@ -250,14 +250,14 @@ window.I18N = {
   "c.email": { en: "Email", zh: "邮箱", fr: "E-mail", si: "ඊමේල්" },
   "c.time": { en: "Every Thursday, 7:30 PM", zh: "每周四 晚上 7:30", fr: "Chaque jeudi à 19h30", si: "සෑම බ්‍රහස්පතින්දාවකම ප.ව. 7:30" },
   "c.meal": { en: "Dinner served from 6:30 PM", zh: "18:30 起提供晚餐", fr: "Repas offert dès 18h30", si: "ප.ව. 6:30 සිට රාත්‍රී ආහාර" },
-  "c.sup.h": { en: "Support us", zh: "支持我们", fr: "Nous soutenir", si: "අපට සහාය වන්න" },
+  "c.sup.h": { ko: "후원 안내", en: "Support us", zh: "支持我们", fr: "Nous soutenir", si: "අපට සහාය වන්න" },
   "c.sup.p": {
     en: "Your prayers and gifts support the table and worship that serve our multicultural neighbors, and help raise up children and leaders.",
     zh: "您的代祷与奉献将用于服事多元文化邻舍的餐桌与敬拜，以及培育孩子和领袖。",
     fr: "Vos prières et vos dons soutiennent les repas et le culte au service de nos voisins multiculturels, ainsi que la formation des enfants et des leaders.",
     si: "ඔබේ යාච්ඤා සහ පරිත්‍යාග, බහු සංස්කෘතික අසල්වැසියන්ට සේවය කරන ආහාර මේසයටත් නමස්කාරයටත්, දරුවන් සහ නායකයන් ගොඩනැංවීමටත් යොදා ගැනේ."
   },
-  "c.bank": { en: "Woori Bank 1005-804-736600", zh: "友利银行 1005-804-736600", fr: "Woori Bank 1005-804-736600", si: "වූරි බැංකුව 1005-804-736600" },
+  "c.bank": { ko: "우리은행 1005-804-736600", en: "Woori Bank 1005-804-736600", zh: "友利银行 1005-804-736600", fr: "Woori Bank 1005-804-736600", si: "වූරි බැංකුව 1005-804-736600" },
   "copy": { ko: "복사", en: "Copy", zh: "复制", fr: "Copier", si: "පිටපත් කරන්න" },
   "copied": { ko: "복사됨", en: "Copied", zh: "已复制", fr: "Copié", si: "පිටපත් විය" },
   "c.map": { en: "View on Naver Map →", zh: "在 Naver 地图中查看 →", fr: "Voir sur Naver Map →", si: "Naver සිතියමේ බලන්න →" },

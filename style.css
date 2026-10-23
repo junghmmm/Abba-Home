@@ -262,7 +262,7 @@ section{padding:120px 0}
 
 /* footer */
 footer{background:#14100d;color:#b9ada0;padding:70px 0 40px;font-size:14px}
-.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:50px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:44px}
 .foot-grid .brand b{color:#f3e9de;font-size:22px}
 .foot-grid .brand small{color:#b9ada0}
 .foot-grid h5{color:#f3e9de;font-size:13px;letter-spacing:.15em;font-weight:500;margin-bottom:16px}
@@ -341,3 +341,8 @@ html:lang(si) body{line-height:1.85}
 html:lang(si) .hero h1,html:lang(si) .vision h2{font-size:clamp(32px,5.4vw,68px);line-height:1.3}
 html:lang(fr) .hero h1,html:lang(en) .hero h1{font-size:clamp(38px,6.2vw,84px)}
 @media (max-width:760px){.menu{margin-left:0}.lang{margin-left:auto}.lang-btn{padding:6px 10px}}
+
+.foot-acct{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:#f3e9de;font-family:var(--en);font-size:15px}
+.foot-copy{background:none;border:1px solid #4a3f37;color:#d8cbbd;border-radius:99px;padding:3px 11px;font-size:12px;font-family:var(--sans)}
+.foot-copy:hover{border-color:#f3e9de;color:#fff}
+@media (max-width:960px) and (min-width:761px){.foot-grid{grid-template-columns:1fr 1fr}}

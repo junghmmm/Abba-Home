@@ -118,6 +118,13 @@
             <li><a href="mailto:${S.email}">${esc(S.email)}</a></li>
           </ul>
         </div>
+        <div>
+          <h5>SUPPORT</h5>
+          <ul>
+            <li>${esc(t("c.sup.h"))}</li>
+            <li class="foot-acct"><span>${esc(t("c.bank"))}</span><button class="foot-copy" data-copy="1005804736600">${esc(t("copy"))}</button></li>
+          </ul>
+        </div>
       </div>
       <div class="foot-bottom">
         <span>© ${new Date().getFullYear()} Abba Home Here &amp; Now. All rights reserved.</span>
