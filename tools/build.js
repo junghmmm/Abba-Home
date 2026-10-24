@@ -2,6 +2,10 @@
    data.js 의 사역 소식으로 news/<id>.html 개별 페이지, rss.xml, sitemap.xml 을 만듭니다. */
 const fs = require("fs"), path = require("path"), vm = require("vm");
 const ROOT = path.join(__dirname, "..");
+const OUT = path.join(ROOT, "public");
+fs.rmSync(OUT, { recursive: true, force: true });
+fs.mkdirSync(OUT);
+for (const f of fs.readdirSync(ROOT)) if (![".git", "public", "tools", "node_modules", ".vercel"].includes(f)) fs.cpSync(path.join(ROOT, f), path.join(OUT, f), { recursive: true });
 const SITE_URL = "https://www.abbahome.co.kr";
 const ctx = { window: {} };
 vm.createContext(ctx);
@@ -14,8 +18,8 @@ const minNameEn = id => (MIN.find(m => m.id === id) || {}).name_en || "";
 const abs = u => u ? SITE_URL + "/" + u.replace(/^\//, "") : "";
 const today = new Date().toISOString().slice(0, 10);
 
-fs.mkdirSync(path.join(ROOT, "news"), { recursive: true });
-for (const f of fs.readdirSync(path.join(ROOT, "news"))) if (f.endsWith(".html")) fs.unlinkSync(path.join(ROOT, "news", f));
+fs.mkdirSync(path.join(OUT, "news"), { recursive: true });
+for (const f of fs.readdirSync(path.join(OUT, "news"))) if (f.endsWith(".html")) fs.unlinkSync(path.join(OUT, "news", f));
 
 for (const p of POSTS) {
   const url = `${SITE_URL}/news/${p.id}`;
@@ -81,7 +85,7 @@ ${paras(p.body_en || p.excerpt_en)}
 </body>
 </html>
 `;
-  fs.writeFileSync(path.join(ROOT, "news", `${p.id}.html`), html);
+  fs.writeFileSync(path.join(OUT, "news", `${p.id}.html`), html);
 }
 
 /* rss.xml */
@@ -105,13 +109,13 @@ ${POSTS.map(p => `<item>
 </channel>
 </rss>
 `;
-fs.writeFileSync(path.join(ROOT, "rss.xml"), rss);
+fs.writeFileSync(path.join(OUT, "rss.xml"), rss);
 
 /* sitemap.xml */
 const pages = [["", "1.0", "weekly", today], ["about", "0.8", "monthly", today], ["ministries", "0.8", "monthly", today], ["news", "0.9", "weekly", today], ["contact", "0.5", "yearly", today]];
 const urls = pages.map(([u, pr, f, d]) => ({ loc: `${SITE_URL}/${u}`, pr, f, d }))
   .concat(POSTS.map(p => ({ loc: `${SITE_URL}/news/${p.id}`, pr: "0.7", f: "monthly", d: p.date })));
-fs.writeFileSync(path.join(ROOT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
+fs.writeFileSync(path.join(OUT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map(u => `  <url>
     <loc>${u.loc}</loc>
