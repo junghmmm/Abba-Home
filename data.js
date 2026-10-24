@@ -479,63 +479,96 @@ window.POSTS = [
 window.GALLERY = [
   {
     "image": "images/daily-01.jpg",
+    "images": [
+      "images/daily-01.jpg",
+      "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-worship1-tAsXr72Kb4voup8SXlLO4cuHU8slNN.jpg",
+      "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-worship2-1gedJy2OvHqGYgetFapkd1orZ8ompX.jpg",
+      "images/daily-08.jpg",
+      "images/graduation-04.jpg",
+      "images/graduation-05.jpg"
+    ],
     "caption": "목요일 저녁, 거실에서 드리는 예배",
     "caption_en": "Thursday evening worship in the living room"
   },
   {
     "image": "images/namjeondo-2025-01.jpg",
+    "images": [
+      "images/namjeondo-2025-01.jpg",
+      "images/anniv-01.jpg",
+      "images/anniv-02.jpg",
+      "images/unity-01.jpg",
+      "images/xmas-01.jpg"
+    ],
     "caption": "함께 모인 아바홈 가족",
     "caption_en": "The Abba Home family together"
   },
   {
-    "image": "images/daily-05.jpg",
-    "caption": "예배 전 함께 나누는 저녁",
-    "caption_en": "Dinner shared before worship"
-  },
-  {
-    "image": "images/daily-06.jpg",
-    "caption": "오늘의 셰프",
-    "caption_en": "Today's chef"
-  },
-  {
-    "image": "images/daily-04.jpg",
+    "image": "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-food1-uLtMwnj1QvCkHX5TXqj2ZZ9ewhDKQ2.jpg",
+    "images": [
+      "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-food1-uLtMwnj1QvCkHX5TXqj2ZZ9ewhDKQ2.jpg",
+      "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-food2-tCiSdhRlRQK7goAyiNfEPYW7uNWcNz.jpg",
+      "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-food3-u1C3SMDsLZxumY03tULRNLTpsUckWH.jpg",
+      "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-food5-fEuQvto4Oz5AgbBuweEfBCaU5klsC0.jpg",
+      "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-food6-v02WzgGZO1guunagpYfRQCGGw8axSj.jpg",
+      "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-food4-gfqgSCTzZJeA8hBkOmuY2ufMCBGC3a.jpg",
+      "images/daily-05.jpg"
+    ],
     "caption": "식탁 위의 정성",
     "caption_en": "Made with love"
   },
   {
-    "image": "images/daily-08.jpg",
-    "caption": "찬양으로 여는 저녁",
-    "caption_en": "An evening opened with praise"
+    "image": "images/daily-06.jpg",
+    "images": [
+      "images/daily-06.jpg",
+      "images/daily-07.jpg",
+      "images/newyear-02.jpg"
+    ],
+    "caption": "오늘의 셰프",
+    "caption_en": "Today's chef"
   },
   {
     "image": "images/daily-03.jpg",
+    "images": [
+      "images/daily-03.jpg",
+      "images/outing-01.jpg",
+      "images/outing-02.jpg",
+      "images/pool-01.jpg"
+    ],
     "caption": "반가운 만남",
     "caption_en": "Happy to see you"
   },
   {
     "image": "images/daily-02.jpg",
+    "images": [
+      "images/daily-02.jpg",
+      "images/grape-01.jpg",
+      "images/grape-02.jpg",
+      "images/ganghwa-01.jpg"
+    ],
     "caption": "아바홈의 가을",
     "caption_en": "Autumn at Abba Home"
   },
   {
-    "image": "images/graduation-04.jpg",
-    "caption": "목요열방예배 찬양",
-    "caption_en": "Thursday worship"
-  },
-  {
-    "image": "images/graduation-05.jpg",
-    "caption": "함께 부르는 노래",
-    "caption_en": "Singing together"
-  },
-  {
-    "image": "images/newyear-02.jpg",
-    "caption": "만두 빚기",
-    "caption_en": "Making dumplings"
-  },
-  {
     "image": "images/seollal-04.jpg",
-    "caption": "설날 윷놀이",
-    "caption_en": "Yut game on Lunar New Year"
+    "images": [
+      "images/seollal-04.jpg",
+      "images/seollal-01.jpg",
+      "images/newyear-03.jpg",
+      "images/newyear-04.jpg"
+    ],
+    "caption": "명절을 함께",
+    "caption_en": "Holidays together"
+  },
+  {
+    "image": "images/srilanka-01.jpg",
+    "images": [
+      "images/srilanka-01.jpg",
+      "images/pakistan-01.jpg",
+      "images/itaewon-01.jpg",
+      "images/yeshua24-01.jpg"
+    ],
+    "caption": "열방을 향한 발걸음",
+    "caption_en": "Steps toward the nations"
   }
 ];
 
