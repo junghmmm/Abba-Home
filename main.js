@@ -181,20 +181,27 @@
   /* ---------- gallery ---------- */
   const gal = $("#gallery");
   if (gal) {
-    gal.innerHTML = G.map((g, i) => {
-      const n = (g.images || [g.image]).filter(Boolean).length;
-      return `
+    let GAL = G;
+    const drawGallery = () => {
+      gal.innerHTML = GAL.map((g, i) => {
+        const n = (g.images || [g.image]).filter(Boolean).length;
+        return `
       <figure class="gal-item reveal" data-i="${i}">
-        ${ph(g.image, i + 2)}
-        ${g.image ? "" : `<span class="empty-label">PHOTO</span>`}
+        ${ph(g.image || (g.images || [])[0], i + 2)}
         ${n > 1 ? `<span class="gal-count">${n}</span>` : ""}
         ${g.caption ? `<figcaption>${esc(L(g, "caption"))}</figcaption>` : ""}
       </figure>`;
-    }).join("");
+      }).join("");
+    };
+    drawGallery();
+    fetch("/api/gallery", { cache: "no-store" }).then(r => r.ok ? r.json() : null).then(j => {
+      if (j && Array.isArray(j.albums)) { GAL = j.albums; drawGallery(); $$("#gallery .reveal").forEach(el => el.classList.add("in")); }
+    }).catch(() => {});
     gal.addEventListener("click", e => {
       const f = e.target.closest(".gal-item");
       if (!f) return;
-      const g = G[+f.dataset.i];
+      const g = GAL[+f.dataset.i];
+      if (!g) return;
       const list = (g.images || [g.image]).filter(Boolean);
       if (!list.length) return;
       let k = 0;
