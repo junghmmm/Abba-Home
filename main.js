@@ -245,6 +245,7 @@
             <time>${fmtDate(p.date)}</time>
             <div class="txt">${esc(L(p, "body") || L(p, "excerpt"))}</div>
             ${imgs.length > 1 ? `<div class="more-imgs">${imgs.slice(1).map(s => `<img src="${esc(s)}" alt="" loading="lazy">`).join("")}</div>` : ""}
+            <p style="margin-top:22px"><a class="link-arrow" href="news/${esc(p.id)}">${esc({ ko: "이 소식 페이지로 보기 · 공유하기 →", en: "Open this story · Share →", zh: "打开此消息 · 分享 →", fr: "Ouvrir cet article · Partager →", si: "මෙම පුවත විවෘත කරන්න · බෙදාගන්න →" }[lang] || "Open →")}</a></p>
           </div>
         </div>`);
     });
