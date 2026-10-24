@@ -5,7 +5,7 @@ const ROOT = path.join(__dirname, "..");
 const OUT = path.join(ROOT, "public");
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT);
-for (const f of fs.readdirSync(ROOT)) if (![".git", "public", "tools", "node_modules", ".vercel"].includes(f)) fs.cpSync(path.join(ROOT, f), path.join(OUT, f), { recursive: true });
+for (const f of fs.readdirSync(ROOT)) if (![".git", "public", "tools", "node_modules", ".vercel", "api", "package.json", "package-lock.json"].includes(f)) fs.cpSync(path.join(ROOT, f), path.join(OUT, f), { recursive: true });
 const SITE_URL = "https://www.abbahome.co.kr";
 const ctx = { window: {} };
 vm.createContext(ctx);
@@ -112,7 +112,7 @@ ${POSTS.map(p => `<item>
 fs.writeFileSync(path.join(OUT, "rss.xml"), rss);
 
 /* sitemap.xml */
-const pages = [["", "1.0", "weekly", today], ["about", "0.8", "monthly", today], ["ministries", "0.8", "monthly", today], ["news", "0.9", "weekly", today], ["contact", "0.5", "yearly", today]];
+const pages = [["", "1.0", "weekly", today], ["about", "0.8", "monthly", today], ["ministries", "0.8", "monthly", today], ["news", "0.9", "weekly", today], ["schedule", "0.6", "weekly", today], ["contact", "0.5", "yearly", today]];
 const urls = pages.map(([u, pr, f, d]) => ({ loc: `${SITE_URL}/${u}`, pr, f, d }))
   .concat(POSTS.map(p => ({ loc: `${SITE_URL}/news/${p.id}`, pr: "0.7", f: "monthly", d: p.date })));
 fs.writeFileSync(path.join(OUT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
