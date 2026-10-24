@@ -556,5 +556,6 @@ window.NATIONS = [
   { code: "LK", name: "스리랑카", name_en: "Sri Lanka", name_zh: "斯里兰卡", name_fr: "Sri Lanka", name_si: "ශ්‍රී ලංකාව" },
   { code: "IN", name: "인도", name_en: "India", name_zh: "印度", name_fr: "Inde", name_si: "ඉන්දියාව" },
   { code: "PK", name: "파키스탄", name_en: "Pakistan", name_zh: "巴基斯坦", name_fr: "Pakistan", name_si: "පාකිස්තානය" },
-  { code: "RU", name: "러시아", name_en: "Russia", name_zh: "俄罗斯", name_fr: "Russie", name_si: "රුසියාව" }
+  { code: "RU", name: "러시아", name_en: "Russia", name_zh: "俄罗斯", name_fr: "Russie", name_si: "රුසියාව" },
+  { code: "MM", name: "미얀마", name_en: "Myanmar", name_zh: "缅甸", name_fr: "Myanmar", name_si: "මියන්මාරය" }
 ];
