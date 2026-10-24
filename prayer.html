@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>기도요청 | 아바홈히어랜나우</title>
+<meta name="description" content="아바홈히어랜나우에 기도제목을 보내 주세요. 아바홈 가족이 함께 기도합니다.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@500;600&family=Noto+Sans+Sinhala:wght@400;500;600&family=Noto+Serif+Sinhala:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.pr-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+.pr-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px}
+.pr-card h2{font-family:var(--serif);font-size:24px;margin-bottom:6px}
+.pr-card .sub{color:var(--muted);font-size:14px;margin-bottom:20px}
+.pf{display:block;margin-bottom:14px}
+.pf span{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+.pf input,.pf textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 14px;font:inherit;font-size:15px;background:#fff;color:var(--ink)}
+.pf textarea{min-height:150px;resize:vertical}
+.pf input:focus,.pf textarea:focus{outline:none;border-color:var(--ink)}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin:4px 0 18px;line-height:1.5}
+.chk input{margin-top:3px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.pbtn{border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:99px;padding:11px 24px;font-size:15px;cursor:pointer}
+.pbtn:hover{background:var(--rust);border-color:var(--rust)}
+.pbtn.ghost{background:#fff;color:var(--ink);border-color:var(--line)}
+.pbtn.ghost:hover{border-color:var(--ink);background:#fff}
+.pbtn.sm{padding:6px 14px;font-size:13px}
+.pmsg{margin-top:12px;font-size:14px;color:var(--rust);min-height:1.2em}
+.plist{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.pitem{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+.pitem p{white-space:pre-wrap;line-height:1.75;margin:0 0 12px}
+.pitem .prow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.pray{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 14px;font-size:13px;cursor:pointer;color:var(--ink)}
+.pray:hover{border-color:var(--rust);color:var(--rust)}
+.pray.did{background:#fbeee6;border-color:#f0cdb8;color:var(--rust)}
+.pempty{color:var(--muted);font-size:14px;padding:16px 0}
+.verse{font-family:var(--serif);font-size:17px;color:var(--ink-2);border-left:3px solid var(--rust);padding:4px 0 4px 16px;margin:0 0 26px}
+.verse small{display:block;font-size:12px;color:var(--muted);margin-top:4px;letter-spacing:.08em}
+.adm{margin-top:60px;text-align:center}
+.adm>button{background:none;border:0;color:var(--muted);font-size:12px;text-decoration:underline;cursor:pointer}
+.adm-panel{margin-top:24px;text-align:left}
+.adm-panel[hidden]{display:none}
+.adm-item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:10px}
+.adm-item.done{opacity:.55}
+.adm-item .who{font-size:13px;color:var(--muted);margin-bottom:6px}
+.adm-item p{white-space:pre-wrap;margin:0 0 10px;line-height:1.7}
+.adm-item .acts{display:flex;gap:6px;flex-wrap:wrap}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;background:#eee;margin-left:6px}
+.tag.on{background:#e3f1e5;color:#246b2e}
+@media (max-width:860px){.pr-grid{grid-template-columns:1fr;gap:36px}}
+</style>
+</head>
+<body data-page="prayer">
+
+<div class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Prayer</span>
+    <h1 id="h1">기도요청</h1>
+    <p id="hp">기도가 필요한 제목을 보내 주세요. 아바홈 가족이 매주 목요열방예배와 각자의 자리에서 함께 기도합니다.</p>
+  </div>
+</div>
+
+<section style="padding-top:56px">
+  <div class="wrap">
+    <div class="pr-grid">
+      <div class="pr-card">
+        <h2 id="f-h">기도제목 보내기</h2>
+        <div class="sub" id="f-sub">보내 주신 내용은 아바홈 사역자들만 봅니다. 함께 나누기를 원하시면 아래에 체크해 주세요.</div>
+        <form id="f">
+          <label class="pf"><span id="l-name">이름 (선택)</span><input id="name" maxlength="40" autocomplete="name"></label>
+          <label class="pf"><span id="l-contact">연락처 (선택 · 전화, 카카오톡 ID, 이메일)</span><input id="contact" maxlength="80"></label>
+          <label class="pf"><span id="l-text">기도제목</span><textarea id="text" maxlength="1500" required></textarea></label>
+          <label class="hp" aria-hidden="true">website<input id="website" tabindex="-1" autocomplete="off"></label>
+          <label class="chk"><input type="checkbox" id="share"><span id="l-share">이름 없이 이 기도제목을 홈페이지에 나누어 많은 분들이 함께 기도하도록 허락합니다. (관리자 확인 후 게시)</span></label>
+          <button class="pbtn" id="send">기도 부탁드립니다</button>
+          <div class="pmsg" id="msg" role="status"></div>
+        </form>
+      </div>
+      <div>
+        <div class="verse" id="verse">“두 사람이 땅에서 합심하여 무엇이든지 구하면 하늘에 계신 내 아버지께서 그들을 위하여 이루게 하시리라”<small>MATTHEW 18:19</small></div>
+        <h2 class="sec-h" id="list-h" style="font-family:var(--serif);font-size:24px;margin-bottom:16px">함께 기도하는 제목</h2>
+        <ul class="plist" id="list"></ul>
+      </div>
+    </div>
+
+    <div class="adm">
+      <button id="adm-btn">관리자</button>
+      <div class="adm-panel" id="adm" hidden>
+        <form id="adm-login" style="display:flex;gap:8px;justify-content:center;margin-bottom:20px">
+          <input type="password" id="pw" placeholder="비밀번호" style="border:1px solid var(--line);border-radius:99px;padding:8px 16px" autocomplete="current-password">
+          <button class="pbtn sm" id="pw-ok">확인</button>
+        </form>
+        <div id="adm-list"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="data.js"></script>
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+<script>
+(function () {
+  const lang = document.documentElement.lang || "ko";
+  const T = {
+    ko: { h1: "기도요청", hp: "기도가 필요한 제목을 보내 주세요. 아바홈 가족이 매주 목요열방예배와 각자의 자리에서 함께 기도합니다.", fh: "기도제목 보내기", fsub: "보내 주신 내용은 아바홈 사역자들만 봅니다. 함께 나누기를 원하시면 아래에 체크해 주세요.", name: "이름 (선택)", contact: "연락처 (선택 · 전화, 카카오톡 ID, 이메일)", text: "기도제목", share: "이름 없이 이 기도제목을 홈페이지에 나누어 많은 분들이 함께 기도하도록 허락합니다. (관리자 확인 후 게시)", send: "기도 부탁드립니다", ok: "기도제목이 전달되었습니다. 아바홈이 함께 기도하겠습니다. 🙏", fail: "보내지 못했습니다. 잠시 후 다시 시도해 주세요.", short: "기도제목을 적어 주세요.", listH: "함께 기도하는 제목", empty: "아직 나눠진 기도제목이 없습니다. 첫 기도제목을 보내 주세요.", pray: "함께 기도했어요", verse: "“두 사람이 땅에서 합심하여 무엇이든지 구하면 하늘에 계신 내 아버지께서 그들을 위하여 이루게 하시리라”" },
+    en: { h1: "Prayer Requests", hp: "Send us what you need prayer for. The Abba Home family will pray together — at Thursday worship and wherever we are.", fh: "Send a prayer request", fsub: "Only Abba Home ministers will see what you send. Check the box below if you'd like to share it.", name: "Name (optional)", contact: "Contact (optional · phone, KakaoTalk ID, email)", text: "Prayer request", share: "I allow this request to be shared on the website without my name so more people can pray (posted after review).", send: "Please pray for me", ok: "Your prayer request has been sent. Abba Home will pray with you. 🙏", fail: "Could not send. Please try again.", short: "Please write your prayer request.", listH: "Praying together", empty: "No shared prayer requests yet. Be the first to send one.", pray: "I prayed", verse: "“If two of you on earth agree about anything they ask, it will be done for them by my Father in heaven.”" },
+    zh: { h1: "代祷请求", hp: "请把需要代祷的事项发给我们。阿爸之家的家人会在周四敬拜和各自的地方一同祷告。", fh: "发送代祷事项", fsub: "您发送的内容只有阿爸之家的同工能看到。若愿意分享，请勾选下方选项。", name: "姓名（可选）", contact: "联系方式（可选 · 电话、KakaoTalk ID、邮箱）", text: "代祷事项", share: "我同意以匿名方式在网站上分享此代祷事项，让更多人一同祷告（审核后发布）。", send: "请为我祷告", ok: "代祷事项已送达，阿爸之家会与您一同祷告。🙏", fail: "发送失败，请稍后再试。", short: "请填写代祷事项。", listH: "一同祷告的事项", empty: "还没有分享的代祷事项。", pray: "我已代祷", verse: "“若是你们中间有两个人在地上同心合意地求什么事，我在天上的父必为他们成全。”" },
+    fr: { h1: "Demandes de prière", hp: "Envoyez-nous vos sujets de prière. La famille d'Abba Home priera avec vous, au culte du jeudi et partout où nous sommes.", fh: "Envoyer un sujet de prière", fsub: "Seuls les responsables d'Abba Home verront votre message. Cochez la case si vous souhaitez le partager.", name: "Nom (facultatif)", contact: "Contact (facultatif · téléphone, KakaoTalk, e-mail)", text: "Sujet de prière", share: "J'accepte que ce sujet soit partagé anonymement sur le site pour que d'autres prient (publié après vérification).", send: "Priez pour moi", ok: "Votre demande a été envoyée. Abba Home priera avec vous. 🙏", fail: "Envoi impossible. Réessayez plus tard.", short: "Veuillez écrire votre sujet de prière.", listH: "Nous prions ensemble", empty: "Aucun sujet partagé pour l'instant.", pray: "J'ai prié", verse: "« Si deux d'entre vous s'accordent sur la terre pour demander une chose, elle leur sera accordée par mon Père qui est dans les cieux. »" },
+    si: { h1: "යාච්ඤා ඉල්ලීම්", hp: "ඔබට යාච්ඤාව අවශ්‍ය කරුණු අපට එවන්න. අබා හෝම් පවුල එකට යාච්ඤා කරනු ඇත.", fh: "යාච්ඤා ඉල්ලීමක් යවන්න", fsub: "ඔබ යවන දේ අබා හෝම් සේවකයින්ට පමණක් පෙනේ. බෙදා ගැනීමට කැමති නම් පහත කොටුව සලකුණු කරන්න.", name: "නම (විකල්ප)", contact: "සම්බන්ධතා (විකල්ප)", text: "යාච්ඤා කරුණ", share: "වැඩි දෙනෙකුට යාච්ඤා කිරීමට මගේ නම නොමැතිව මෙය වෙබ් අඩවියේ බෙදා ගැනීමට එකඟ වෙමි (සමාලෝචනයෙන් පසු).", send: "මා වෙනුවෙන් යාච්ඤා කරන්න", ok: "ඔබේ ඉල්ලීම ලැබුණා. අබා හෝම් ඔබ සමඟ යාච්ඤා කරයි. 🙏", fail: "යැවීමට නොහැකි විය. නැවත උත්සාහ කරන්න.", short: "කරුණාකර යාච්ඤා කරුණ ලියන්න.", listH: "එකට යාච්ඤා කරන කරුණු", empty: "තවම බෙදාගත් කරුණු නැත.", pray: "මම යාච්ඤා කළා", verse: "“ඔබගෙන් දෙදෙනෙක් පොළොවේදී එකඟව යමක් ඉල්ලුවොත්, ස්වර්ගයේ සිටින මාගේ පියාණන් එය ඔවුන්ට සලසා දෙනු ඇත.”" }
+  };
+  const L = T[lang] || T.en;
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s || "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const set = (id, v) => { const el = $(id); if (el) el.textContent = v; };
+  set("h1", L.h1); set("hp", L.hp); set("f-h", L.fh); set("f-sub", L.fsub); set("l-name", L.name); set("l-contact", L.contact);
+  set("l-text", L.text); set("l-share", L.share); set("send", L.send); set("list-h", L.listH);
+  $("verse").firstChild.textContent = L.verse;
+  if (lang !== "ko") document.title = `${L.h1} | Abba Home Here & Now`;
+
+  async function api(body) {
+    const r = await fetch("/api/prayers", body ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : { cache: "no-store" });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) { const e = new Error(j.error || "error"); e.status = r.status; throw e; }
+    return j;
+  }
+  const PK = "abba-prayed";
+  const prayed = () => { try { return JSON.parse(localStorage.getItem(PK) || "[]"); } catch (e) { return []; } };
+  const markPrayed = id => { try { localStorage.setItem(PK, JSON.stringify(prayed().concat(id).slice(-300))); } catch (e) {} };
+
+  let items = [];
+  function renderList() {
+    const did = prayed();
+    $("list").innerHTML = items.length ? items.map(it => `<li class="pitem"><p>${esc(it.text)}</p><div class="prow"><span>${esc(it.date.replace(/-/g, "."))}</span><button class="pray ${did.includes(it.id) ? "did" : ""}" data-id="${esc(it.id)}">🙏 ${esc(L.pray)} · ${it.prayed || 0}</button></div></li>`).join("")
+      : `<li class="pempty">${esc(L.empty)}</li>`;
+  }
+  async function load() { try { items = (await api()).items || []; } catch (e) { items = []; } renderList(); }
+  $("list").addEventListener("click", async ev => {
+    const b = ev.target.closest(".pray"); if (!b || b.classList.contains("did")) return;
+    b.disabled = true;
+    try { const j = await api({ action: "pray", id: b.dataset.id }); const it = items.find(x => x.id === b.dataset.id); if (it) it.prayed = j.prayed; markPrayed(b.dataset.id); renderList(); }
+    catch (e) { b.disabled = false; }
+  });
+
+  $("f").addEventListener("submit", async ev => {
+    ev.preventDefault();
+    const text = $("text").value.trim();
+    if (text.length < 2) { $("msg").textContent = L.short; return; }
+    $("send").disabled = true; $("msg").textContent = "";
+    try {
+      await api({ action: "submit", name: $("name").value, contact: $("contact").value, text, share: $("share").checked, website: $("website").value });
+      $("f").reset(); $("msg").textContent = L.ok;
+    } catch (e) { $("msg").textContent = L.fail; }
+    $("send").disabled = false;
+  });
+
+  /* 관리자 */
+  const KEY = "abba-admin";
+  const getPw = () => { try { return sessionStorage.getItem(KEY) || ""; } catch (e) { return ""; } };
+  const setPw = v => { try { v ? sessionStorage.setItem(KEY, v) : sessionStorage.removeItem(KEY); } catch (e) {} };
+  let all = [];
+  function renderAdmin() {
+    $("adm-login").style.display = getPw() ? "none" : "flex";
+    $("adm-list").innerHTML = !getPw() ? "" : (all.length ? all.map(it => `<div class="adm-item ${it.done ? "done" : ""}" data-id="${esc(it.id)}">
+      <div class="who">${esc(it.date)} · ${esc(it.name || "익명")}${it.contact ? " · " + esc(it.contact) : ""}${it.share ? `<span class="tag ${it.approved ? "on" : ""}">${it.approved ? "게시 중" : "나눔 희망"}</span>` : `<span class="tag">비공개</span>`} · 🙏 ${it.prayed || 0}</div>
+      <p>${esc(it.text)}</p>
+      <div class="acts">${it.share ? `<button class="pbtn sm ${it.approved ? "ghost" : ""}" data-a="approve" data-v="${it.approved ? "" : "1"}">${it.approved ? "게시 내리기" : "홈페이지에 게시"}</button>` : ""}
+        <button class="pbtn sm ghost" data-a="done" data-v="${it.done ? "" : "1"}">${it.done ? "응답 표시 취소" : "응답됨 / 완료"}</button>
+        <button class="pbtn sm ghost" data-a="delete">삭제</button></div></div>`).join("") : `<p class="pempty">받은 기도제목이 없습니다.</p>`);
+  }
+  async function adminCall(body) {
+    try { const j = await api({ ...body, password: getPw() }); all = j.items || all; renderAdmin(); load(); return true; }
+    catch (e) { if (e.status === 401) { setPw(""); all = []; renderAdmin(); $("pw").placeholder = "비밀번호가 맞지 않습니다"; } return false; }
+  }
+  $("adm-btn").onclick = () => { $("adm").hidden = !$("adm").hidden; if (!$("adm").hidden && getPw()) adminCall({ action: "list" }); else renderAdmin(); };
+  $("adm-login").addEventListener("submit", ev => { ev.preventDefault(); setPw($("pw").value); $("pw").value = ""; adminCall({ action: "list" }); });
+  $("adm-list").addEventListener("click", ev => {
+    const b = ev.target.closest("[data-a]"); if (!b) return;
+    const id = b.closest(".adm-item").dataset.id, a = b.dataset.a;
+    if (a === "delete" && !b.dataset.armed) { b.dataset.armed = "1"; b.textContent = "한 번 더 누르면 삭제"; return; }
+    adminCall({ action: a, id, value: !!b.dataset.v });
+  });
+  load();
+})();
+</script>
+</body>
+</html>
