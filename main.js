@@ -58,7 +58,8 @@
     ["about.html", "nav.about", "about"],
     ["ministries.html", "nav.ministries", "ministries"],
     ["news.html", "nav.news", "news"],
-    ["schedule.html", "nav.schedule", "schedule"]
+    ["schedule.html", "nav.schedule", "schedule"],
+    ["prayer.html", "nav.prayer", "prayer"]
   ];
   const cur = LANGS.find(l => l.code === lang) || LANGS[0];
   const header = document.createElement("header");
@@ -180,15 +181,43 @@
   /* ---------- gallery ---------- */
   const gal = $("#gallery");
   if (gal) {
-    gal.innerHTML = G.map((g, i) => `
-      <figure class="gal-item reveal" data-img="${esc(g.image)}">
+    gal.innerHTML = G.map((g, i) => {
+      const n = (g.images || [g.image]).filter(Boolean).length;
+      return `
+      <figure class="gal-item reveal" data-i="${i}">
         ${ph(g.image, i + 2)}
         ${g.image ? "" : `<span class="empty-label">PHOTO</span>`}
+        ${n > 1 ? `<span class="gal-count">${n}</span>` : ""}
         ${g.caption ? `<figcaption>${esc(L(g, "caption"))}</figcaption>` : ""}
-      </figure>`).join("");
+      </figure>`;
+    }).join("");
     gal.addEventListener("click", e => {
       const f = e.target.closest(".gal-item");
-      if (f && f.dataset.img) openModal(`<div class="lightbox"><img src="${f.dataset.img}" alt=""></div>`);
+      if (!f) return;
+      const g = G[+f.dataset.i];
+      const list = (g.images || [g.image]).filter(Boolean);
+      if (!list.length) return;
+      let k = 0;
+      const show = () => {
+        openModal(`<div class="album"><img src="${esc(list[k])}" alt="${esc(L(g, "caption"))}">
+          <div class="album-bar"><span>${esc(L(g, "caption"))}</span>${list.length > 1 ? `<span class="album-num">${k + 1} / ${list.length}</span>` : ""}</div>
+          ${list.length > 1 ? `<button class="album-nav prev" aria-label="Previous">‹</button><button class="album-nav next" aria-label="Next">›</button>` : ""}</div>`);
+        const a = document.querySelector(".modal .album");
+        a.addEventListener("click", ev => {
+          const b = ev.target.closest(".album-nav");
+          if (!b) return;
+          ev.stopPropagation();
+          k = (k + (b.classList.contains("next") ? 1 : -1) + list.length) % list.length;
+          show();
+        });
+      };
+      show();
+    });
+    document.addEventListener("keydown", e => {
+      const a = document.querySelector(".modal.open .album");
+      if (!a) return;
+      const b = a.querySelector(e.key === "ArrowRight" ? ".next" : e.key === "ArrowLeft" ? ".prev" : null);
+      if (b) b.click();
     });
   }
 
