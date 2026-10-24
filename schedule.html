@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>일정 | 아바홈히어랜나우</title>
+<meta name="description" content="아바홈히어랜나우의 예배와 사역 일정. 매주 목요일 오후 7:30 목요열방예배.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@500;600&family=Noto+Sans+Sinhala:wght@400;500;600&family=Noto+Serif+Sinhala:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.cal-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.cal-bar h2{font-family:var(--serif);font-size:30px;font-weight:600;min-width:200px}
+.cal-nav{display:flex;gap:8px;align-items:center}
+.cal-nav button,.sch-btn{border:1px solid var(--line);background:#fff;border-radius:99px;padding:8px 16px;font-size:14px;color:var(--ink);transition:.2s}
+.cal-nav button:hover,.sch-btn:hover{border-color:var(--ink)}
+.sch-btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.sch-btn.primary:hover{background:var(--rust);border-color:var(--rust)}
+.sch-btn.danger{color:#b3261e;border-color:#e8c4c0}
+.admin-bar{display:none;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#fff4e8;border:1px solid #efd6bb;color:var(--rust-2);border-radius:14px;padding:12px 16px;margin-bottom:18px;font-size:14px}
+body.is-admin .admin-bar{display:flex}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff}
+.cal .wd{padding:10px 8px;font-size:12.5px;font-weight:500;color:var(--muted);background:var(--paper);border-bottom:1px solid var(--line);text-align:center}
+.cal .wd.sun{color:#b3261e}
+.cal .day{min-height:112px;padding:8px 8px 10px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:4px;min-width:0}
+.cal .day:nth-child(7n){border-right:0}
+.cal .day.out{background:#faf7f2;color:#b9aea3}
+.cal .day .n{font-size:13px;font-weight:500;line-height:1;margin-bottom:2px}
+.cal .day.sun .n{color:#b3261e}
+.cal .day.today .n{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--rust);color:#fff}
+body.is-admin .cal .day{cursor:pointer}
+body.is-admin .cal .day:hover{background:#fffaf3}
+.ev{display:block;width:100%;text-align:left;border:0;border-radius:7px;padding:3px 7px;font-size:12px;line-height:1.4;background:#f3e3d6;color:var(--rust-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev:hover{background:#ecd3bf}
+.ev.rec{background:#eef0ea;color:#4d5a43}
+.ev b{font-weight:600;margin-right:4px}
+.upcoming{margin-top:56px}
+.upcoming h3{font-family:var(--serif);font-size:24px;margin-bottom:16px}
+.up-list{list-style:none;display:grid;gap:10px}
+.up-item{display:grid;grid-template-columns:86px 1fr;gap:16px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px;cursor:pointer;text-align:left;width:100%}
+.up-item .d{font-family:var(--en);font-size:22px;line-height:1.1;color:var(--rust)}
+.up-item .d small{display:block;font-family:var(--sans);font-size:12px;color:var(--muted)}
+.up-item .t{font-weight:600}
+.up-item .s{font-size:13.5px;color:var(--muted)}
+.empty-up{color:var(--muted);font-size:14.5px}
+.sch-dlg{border:0;border-radius:20px;padding:0;max-width:480px;width:calc(100% - 32px);background:var(--paper);color:var(--ink)}
+.sch-dlg::backdrop{background:rgba(15,10,8,.55);backdrop-filter:blur(4px)}
+.sch-dlg form,.sch-dlg .view{padding:28px 26px 24px}
+.sch-dlg h3{font-family:var(--serif);font-size:22px;margin-bottom:18px}
+.sch-dlg .fields{grid-template-columns:1fr 1fr;gap:14px}
+.sch-dlg .field textarea{min-height:90px}
+.sch-dlg .acts{display:flex;justify-content:space-between;gap:10px;margin-top:22px;flex-wrap:wrap}
+.sch-dlg .acts div{display:flex;gap:8px}
+.sch-dlg .msg{color:#b3261e;font-size:13.5px;margin-top:10px;min-height:1em}
+.sch-dlg .view p{color:var(--ink-2);white-space:pre-line}
+.sch-dlg .view .meta{color:var(--rust);font-size:14px;margin-bottom:12px}
+.admin-link{margin-top:40px;text-align:right}
+.admin-link button{background:none;border:0;color:var(--muted);font-size:13px;text-decoration:underline}
+@media (max-width:760px){
+  .cal .day{min-height:74px;padding:5px 4px}
+  .cal .wd{font-size:11px;padding:8px 2px}
+  .ev{font-size:10.5px;padding:2px 4px}
+  .ev b{display:none}
+  .cal-bar h2{font-size:24px;min-width:0}
+  .sch-dlg .fields{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body data-page="schedule">
+
+<div class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Schedule</span>
+    <h1 id="sch-h1">아바홈 일정</h1>
+    <p id="sch-p">예배와 사역, 함께하는 모임 일정을 안내합니다. 매주 목요일 저녁에는 목요열방예배가 있습니다.</p>
+  </div>
+</div>
+
+<section style="padding-top:56px">
+  <div class="wrap">
+    <div class="admin-bar"><span id="admin-msg">관리자 모드 · 날짜를 누르면 일정을 추가하고, 일정을 누르면 수정·삭제할 수 있습니다.</span>
+      <span style="display:flex;gap:8px"><button class="sch-btn primary" id="btn-add">+ 일정 추가</button><button class="sch-btn" id="btn-logout">관리자 나가기</button></span></div>
+    <div class="cal-bar">
+      <h2 id="cal-title"></h2>
+      <div class="cal-nav">
+        <button id="prev" aria-label="Previous month">‹</button>
+        <button id="today">오늘</button>
+        <button id="next" aria-label="Next month">›</button>
+      </div>
+    </div>
+    <div class="cal" id="cal"></div>
+
+    <div class="upcoming">
+      <h3 id="up-h">다가오는 일정</h3>
+      <ul class="up-list" id="up-list"></ul>
+    </div>
+    <div class="admin-link"><button id="btn-admin">관리자</button></div>
+  </div>
+</section>
+
+<dialog class="sch-dlg" id="dlg-login">
+  <form method="dialog" id="f-login">
+    <h3 id="l-h">관리자 확인</h3>
+    <div class="field"><label for="l-pw" id="l-lbl">비밀번호</label><input type="password" id="l-pw" autocomplete="current-password" required></div>
+    <div class="msg" id="l-msg"></div>
+    <div class="acts"><span></span><div><button type="button" class="sch-btn" data-close>취소</button><button class="sch-btn primary" id="l-ok">확인</button></div></div>
+  </form>
+</dialog>
+
+<dialog class="sch-dlg" id="dlg-edit">
+  <form method="dialog" id="f-edit">
+    <h3 id="e-h">일정 추가</h3>
+    <input type="hidden" id="e-id">
+    <div class="fields">
+      <div class="field full"><label for="e-title" data-k="title">제목</label><input id="e-title" maxlength="120" required></div>
+      <div class="field"><label for="e-date" data-k="date">날짜</label><input type="date" id="e-date" required></div>
+      <div class="field"><label for="e-end" data-k="end">끝나는 날 (선택)</label><input type="date" id="e-end"></div>
+      <div class="field"><label for="e-time" data-k="time">시간 (선택)</label><input id="e-time" maxlength="20" placeholder="19:30"></div>
+      <div class="field"><label for="e-place" data-k="place">장소 (선택)</label><input id="e-place" maxlength="120"></div>
+      <div class="field full"><label for="e-note" data-k="note">메모 (선택)</label><textarea id="e-note" maxlength="1000"></textarea></div>
+    </div>
+    <div class="msg" id="e-msg"></div>
+    <div class="acts"><button type="button" class="sch-btn danger" id="e-del">삭제</button><div><button type="button" class="sch-btn" data-close>취소</button><button class="sch-btn primary" id="e-save">저장</button></div></div>
+  </form>
+</dialog>
+
+<dialog class="sch-dlg" id="dlg-view">
+  <div class="view">
+    <h3 id="v-title"></h3>
+    <div class="meta" id="v-meta"></div>
+    <p id="v-note"></p>
+    <div class="acts"><span></span><div><button type="button" class="sch-btn" data-close>닫기</button></div></div>
+  </div>
+</dialog>
+
+<script src="data.js"></script>
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+<script>
+(function () {
+  const lang = document.documentElement.lang || "ko";
+  const T = {
+    ko: { h1: "아바홈 일정", p: "예배와 사역, 함께하는 모임 일정을 안내합니다. 매주 목요일 저녁에는 목요열방예배가 있습니다.", today: "오늘", up: "다가오는 일정", none: "예정된 일정이 아직 없습니다. 매주 목요일 오후 7:30 목요열방예배에 함께해요.", admin: "관리자", login: "관리자 확인", pw: "비밀번호", ok: "확인", cancel: "취소", wrong: "비밀번호가 맞지 않습니다.", adminMsg: "관리자 모드 · 날짜를 누르면 일정을 추가하고, 일정을 누르면 수정·삭제할 수 있습니다.", add: "+ 일정 추가", logout: "관리자 나가기", addH: "일정 추가", editH: "일정 수정", title: "제목", date: "날짜", end: "끝나는 날 (선택)", time: "시간 (선택)", place: "장소 (선택)", note: "메모 (선택)", save: "저장", del: "삭제", close: "닫기", delQ: "이 일정을 삭제할까요? 한 번 더 누르면 삭제됩니다.", fail: "저장하지 못했습니다. 잠시 후 다시 시도해 주세요.", need: "제목과 날짜를 입력해 주세요.", weekly: "목요열방예배", weeklyNote: "매주 목요일 · 6:30 식사, 7:30 예배", loadFail: "일정을 불러오지 못했습니다." },
+    en: { h1: "Abba Home Schedule", p: "Worship, ministry and gatherings. Every Thursday evening we gather for All Nations Worship.", today: "Today", up: "Upcoming", none: "No upcoming events yet. Join us every Thursday at 7:30 PM for All Nations Worship.", admin: "Admin", login: "Admin sign-in", pw: "Password", ok: "OK", cancel: "Cancel", wrong: "Incorrect password.", adminMsg: "Admin mode · tap a date to add an event, tap an event to edit or delete it.", add: "+ Add event", logout: "Exit admin", addH: "Add event", editH: "Edit event", title: "Title", date: "Date", end: "End date (optional)", time: "Time (optional)", place: "Place (optional)", note: "Note (optional)", save: "Save", del: "Delete", close: "Close", delQ: "Delete this event? Press again to confirm.", fail: "Could not save. Please try again.", need: "Please enter a title and date.", weekly: "All Nations Worship", weeklyNote: "Every Thursday · Dinner 6:30, Worship 7:30 PM", loadFail: "Could not load the schedule." },
+    zh: { h1: "Abba Home 日程", p: "敬拜、事工与聚会日程。每周四晚上有列邦敬拜。", today: "今天", up: "即将举行", none: "暂无即将举行的活动。欢迎每周四晚7:30参加列邦敬拜。", admin: "管理员", login: "管理员验证", pw: "密码", ok: "确认", cancel: "取消", wrong: "密码不正确。", adminMsg: "管理员模式 · 点击日期添加日程，点击日程进行修改或删除。", add: "+ 添加日程", logout: "退出管理员", addH: "添加日程", editH: "修改日程", title: "标题", date: "日期", end: "结束日期（可选）", time: "时间（可选）", place: "地点（可选）", note: "备注（可选）", save: "保存", del: "删除", close: "关闭", delQ: "确定删除此日程？再按一次即删除。", fail: "保存失败，请稍后再试。", need: "请输入标题和日期。", weekly: "周四列邦敬拜", weeklyNote: "每周四 · 18:30 用餐，19:30 敬拜", loadFail: "无法加载日程。" },
+    fr: { h1: "Agenda d’Abba Home", p: "Cultes, ministères et rencontres. Chaque jeudi soir, nous nous réunissons pour le culte des nations.", today: "Aujourd’hui", up: "À venir", none: "Aucun événement à venir pour le moment. Rejoignez-nous chaque jeudi à 19h30.", admin: "Admin", login: "Connexion admin", pw: "Mot de passe", ok: "OK", cancel: "Annuler", wrong: "Mot de passe incorrect.", adminMsg: "Mode admin · touchez une date pour ajouter, un événement pour le modifier ou le supprimer.", add: "+ Ajouter", logout: "Quitter l’admin", addH: "Ajouter un événement", editH: "Modifier l’événement", title: "Titre", date: "Date", end: "Date de fin (facultatif)", time: "Heure (facultatif)", place: "Lieu (facultatif)", note: "Note (facultatif)", save: "Enregistrer", del: "Supprimer", close: "Fermer", delQ: "Supprimer cet événement ? Appuyez encore pour confirmer.", fail: "Échec de l’enregistrement. Réessayez.", need: "Saisissez un titre et une date.", weekly: "Culte des nations", weeklyNote: "Chaque jeudi · repas 18h30, culte 19h30", loadFail: "Impossible de charger l’agenda." },
+    si: { h1: "Abba Home දින දර්ශනය", p: "නමස්කාර, සේවා සහ හමුවීම් කාලසටහන. සෑම බ්‍රහස්පතින්දා සවසම සියලු ජාතීන්ගේ නමස්කාරය පැවැත්වේ.", today: "අද", up: "ඉදිරි කටයුතු", none: "තවම ඉදිරි කටයුතු නැත. සෑම බ්‍රහස්පතින්දාවකම ප.ව. 7:30 ට අප සමඟ එක්වන්න.", admin: "පරිපාලක", login: "පරිපාලක තහවුරු කිරීම", pw: "මුරපදය", ok: "හරි", cancel: "අවලංගු", wrong: "මුරපදය වැරදියි.", adminMsg: "පරිපාලක ප්‍රකාරය · දිනයක් තට්ටු කර එක් කරන්න, කටයුත්තක් තට්ටු කර වෙනස් කරන්න.", add: "+ එක් කරන්න", logout: "පිටවන්න", addH: "කටයුත්තක් එක් කරන්න", editH: "කටයුත්ත වෙනස් කරන්න", title: "මාතෘකාව", date: "දිනය", end: "අවසන් දිනය (විකල්ප)", time: "වේලාව (විකල්ප)", place: "ස්ථානය (විකල්ප)", note: "සටහන (විකල්ප)", save: "සුරකින්න", del: "මකන්න", close: "වසන්න", delQ: "මෙය මකන්නද? තහවුරු කිරීමට නැවත ඔබන්න.", fail: "සුරැකීමට නොහැකි විය.", need: "මාතෘකාව සහ දිනය ඇතුළත් කරන්න.", weekly: "සියලු ජාතීන්ගේ නමස්කාරය", weeklyNote: "සෑම බ්‍රහස්පතින්දාවකම · ආහාර 6:30, නමස්කාරය 7:30", loadFail: "දින දර්ශනය පූරණය කළ නොහැක." }
+  };
+  const L = T[lang] || T.ko;
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s || "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const locale = { ko: "ko-KR", en: "en-US", zh: "zh-CN", fr: "fr-FR", si: "si-LK" }[lang] || "ko-KR";
+  const pad = n => String(n).padStart(2, "0");
+  const ymd = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const parse = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); };
+
+  /* 문구 */
+  $("sch-h1").textContent = L.h1; $("sch-p").textContent = L.p; $("today").textContent = L.today; $("up-h").textContent = L.up;
+  $("btn-admin").textContent = L.admin; $("l-h").textContent = L.login; $("l-lbl").textContent = L.pw; $("l-ok").textContent = L.ok;
+  $("admin-msg").textContent = L.adminMsg; $("btn-add").textContent = L.add; $("btn-logout").textContent = L.logout;
+  document.querySelectorAll("[data-k]").forEach(el => el.textContent = L[el.dataset.k]);
+  $("e-save").textContent = L.save; $("e-del").textContent = L.del;
+  document.querySelectorAll("[data-close]").forEach(b => { b.textContent = b.closest("#dlg-view") ? L.close : L.cancel; b.onclick = () => b.closest("dialog").close(); });
+  if (lang !== "ko") document.title = `${L.h1} | Abba Home Here & Now`;
+
+  /* 상태 */
+  let events = [], view = new Date(); view.setDate(1);
+  const KEY = "abba-admin";
+  const getPw = () => { try { return sessionStorage.getItem(KEY) || ""; } catch (e) { return ""; } };
+  const setPw = v => { try { v ? sessionStorage.setItem(KEY, v) : sessionStorage.removeItem(KEY); } catch (e) {} };
+  const setAdmin = on => document.body.classList.toggle("is-admin", on);
+  setAdmin(!!getPw());
+
+  async function api(body) {
+    const r = await fetch("/api/events", body ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : { cache: "no-store" });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) { const e = new Error(j.error || "error"); e.status = r.status; throw e; }
+    return j;
+  }
+
+  /* 날짜별 일정 */
+  function eventsOn(ds) {
+    const list = events.filter(e => e.endDate ? (ds >= e.date && ds <= e.endDate) : ds === e.date);
+    if (parse(ds).getDay() === 4) list.unshift({ id: "__weekly", title: L.weekly, time: "19:30", note: L.weeklyNote, rec: true, date: ds });
+    return list;
+  }
+
+  function render() {
+    const y = view.getFullYear(), m = view.getMonth();
+    $("cal-title").textContent = new Intl.DateTimeFormat(locale, { year: "numeric", month: "long" }).format(view);
+    const start = new Date(y, m, 1 - new Date(y, m, 1).getDay());
+    const wdFmt = new Intl.DateTimeFormat(locale, { weekday: "short" });
+    let html = "";
+    for (let i = 0; i < 7; i++) html += `<div class="wd${i === 0 ? " sun" : ""}">${esc(wdFmt.format(new Date(2026, 0, 4 + i)))}</div>`;
+    const todayS = ymd(new Date());
+    for (let i = 0; i < 42; i++) {
+      const d = new Date(start); d.setDate(start.getDate() + i);
+      if (i >= 35 && d.getMonth() !== m) break;
+      const ds = ymd(d);
+      const cls = ["day", d.getMonth() !== m ? "out" : "", d.getDay() === 0 ? "sun" : "", ds === todayS ? "today" : ""].join(" ");
+      html += `<div class="${cls}" data-date="${ds}"><span class="n">${d.getDate()}</span>${eventsOn(ds).map(e =>
+        `<button class="ev${e.rec ? " rec" : ""}" data-id="${esc(e.id)}" data-date="${ds}" title="${esc(e.title)}">${e.time ? `<b>${esc(e.time)}</b>` : ""}${esc(e.title)}</button>`).join("")}</div>`;
+    }
+    $("cal").innerHTML = html;
+
+    const up = events.filter(e => (e.endDate || e.date) >= todayS).slice(0, 10);
+    const dFmt = new Intl.DateTimeFormat(locale, { month: "short", day: "numeric", weekday: "short" });
+    $("up-list").innerHTML = up.length ? up.map(e => `<li><button class="up-item" data-id="${esc(e.id)}"><span class="d">${esc(e.date.slice(5).replace("-", "."))}<small>${esc(dFmt.format(parse(e.date)))}</small></span><span><span class="t">${esc(e.title)}</span><br><span class="s">${esc([e.time, e.place, e.endDate ? "~ " + e.endDate.slice(5).replace("-", ".") : ""].filter(Boolean).join(" · "))}</span></span></button></li>`).join("")
+      : `<li class="empty-up">${esc(L.none)}</li>`;
+  }
+
+  /* 보기 / 편집 */
+  function openView(e) {
+    $("v-title").textContent = e.title;
+    $("v-meta").textContent = [e.rec ? "" : e.date.replace(/-/g, ".") + (e.endDate ? " ~ " + e.endDate.replace(/-/g, ".") : ""), e.time, e.place].filter(Boolean).join(" · ");
+    $("v-note").textContent = e.note || "";
+    $("dlg-view").showModal();
+  }
+  let delArmed = false;
+  function openEdit(e, date) {
+    const isNew = !e;
+    e = e || { id: "", title: "", date: date || ymd(new Date()), endDate: "", time: "", place: "", note: "" };
+    $("e-h").textContent = isNew ? L.addH : L.editH;
+    $("e-id").value = e.id; $("e-title").value = e.title; $("e-date").value = e.date; $("e-end").value = e.endDate || "";
+    $("e-time").value = e.time || ""; $("e-place").value = e.place || ""; $("e-note").value = e.note || "";
+    $("e-del").style.visibility = isNew ? "hidden" : "visible";
+    $("e-msg").textContent = ""; delArmed = false; $("e-del").textContent = L.del;
+    $("dlg-edit").showModal();
+  }
+  async function guarded(body, msgEl) {
+    try { const j = await api({ ...body, password: getPw() }); events = j.events || events; render(); return true; }
+    catch (err) {
+      if (err.status === 401) { setPw(""); setAdmin(false); msgEl.textContent = L.wrong; }
+      else msgEl.textContent = L.fail;
+      return false;
+    }
+  }
+  $("f-edit").addEventListener("submit", async ev => {
+    ev.preventDefault();
+    const e = { id: $("e-id").value, title: $("e-title").value.trim(), date: $("e-date").value, endDate: $("e-end").value, time: $("e-time").value.trim(), place: $("e-place").value.trim(), note: $("e-note").value.trim() };
+    if (!e.title || !e.date) { $("e-msg").textContent = L.need; return; }
+    $("e-save").disabled = true;
+    if (await guarded({ action: "save", event: e }, $("e-msg"))) $("dlg-edit").close();
+    $("e-save").disabled = false;
+  });
+  $("e-del").onclick = async () => {
+    if (!delArmed) { delArmed = true; $("e-msg").textContent = L.delQ; $("e-del").textContent = L.del + " ✓"; return; }
+    $("e-del").disabled = true;
+    if (await guarded({ action: "delete", id: $("e-id").value }, $("e-msg"))) $("dlg-edit").close();
+    $("e-del").disabled = false;
+  };
+
+  /* 클릭 */
+  const admin = () => document.body.classList.contains("is-admin");
+  const findEv = (id, date) => id === "__weekly" ? eventsOn(date)[0] : events.find(x => x.id === id);
+  $("cal").addEventListener("click", ev => {
+    const b = ev.target.closest(".ev");
+    if (b) { const e = findEv(b.dataset.id, b.dataset.date); if (!e) return; return (admin() && !e.rec) ? openEdit(e) : openView(e); }
+    const d = ev.target.closest(".day");
+    if (d && admin()) openEdit(null, d.dataset.date);
+  });
+  $("up-list").addEventListener("click", ev => {
+    const b = ev.target.closest(".up-item"); if (!b) return;
+    const e = events.find(x => x.id === b.dataset.id); if (e) admin() ? openEdit(e) : openView(e);
+  });
+  $("prev").onclick = () => { view.setMonth(view.getMonth() - 1); render(); };
+  $("next").onclick = () => { view.setMonth(view.getMonth() + 1); render(); };
+  $("today").onclick = () => { view = new Date(); view.setDate(1); render(); };
+  $("btn-add").onclick = () => openEdit(null);
+  $("btn-logout").onclick = () => { setPw(""); setAdmin(false); };
+
+  /* 관리자 로그인 */
+  $("btn-admin").onclick = () => { $("l-pw").value = ""; $("l-msg").textContent = ""; $("dlg-login").showModal(); };
+  $("f-login").addEventListener("submit", async ev => {
+    ev.preventDefault();
+    const pw = $("l-pw").value; $("l-ok").disabled = true;
+    try { await api({ action: "check", password: pw }); setPw(pw); setAdmin(true); $("dlg-login").close(); }
+    catch (err) { $("l-msg").textContent = err.status === 401 ? L.wrong : L.fail; }
+    $("l-ok").disabled = false;
+  });
+
+  render();
+  api().then(j => { events = j.events || []; render(); }).catch(() => {
+    $("up-list").innerHTML = `<li class="empty-up">${esc(L.loadFail)}</li>`;
+  });
+})();
+</script>
+</body>
+</html>
