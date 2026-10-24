@@ -27,6 +27,7 @@ window.I18N = {
   "nav.about": { ko: "소개", en: "About", zh: "关于我们", fr: "À propos", si: "අප ගැන" },
   "nav.ministries": { ko: "사역", en: "Ministries", zh: "事工", fr: "Ministères", si: "සේවාවන්" },
   "nav.news": { ko: "사역소식", en: "News", zh: "事工消息", fr: "Actualités", si: "පුවත්" },
+  "nav.schedule": { ko: "일정", en: "Schedule", zh: "日程", fr: "Agenda", si: "දින දර්ශනය" },
   "nav.contact": { ko: "문의하기", en: "Contact", zh: "联系我们", fr: "Contact", si: "අමතන්න" },
 
   "foot.desc": {
