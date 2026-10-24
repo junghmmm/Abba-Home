@@ -57,7 +57,8 @@
     ["index.html", "nav.home", "home"],
     ["about.html", "nav.about", "about"],
     ["ministries.html", "nav.ministries", "ministries"],
-    ["news.html", "nav.news", "news"]
+    ["news.html", "nav.news", "news"],
+    ["schedule.html", "nav.schedule", "schedule"]
   ];
   const cur = LANGS.find(l => l.code === lang) || LANGS[0];
   const header = document.createElement("header");
