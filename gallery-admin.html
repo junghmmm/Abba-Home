@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>사진 관리 | 아바홈히어랜나우</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.ga-bar{position:sticky;top:76px;z-index:5;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--bg,#faf7f2);padding:12px 0;border-bottom:1px solid var(--line);margin-bottom:24px}
+.gbtn{border:1px solid var(--line);background:#fff;border-radius:99px;padding:8px 16px;font-size:14px;color:var(--ink);cursor:pointer}
+.gbtn:hover{border-color:var(--ink)}
+.gbtn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.gbtn.primary:hover{background:var(--rust);border-color:var(--rust)}
+.gbtn.danger{color:#b3261e;border-color:#e8c4c0}
+.gbtn:disabled{opacity:.5;cursor:default}
+.gmsg{font-size:14px;color:var(--rust)}
+.alb{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:22px}
+.alb-head{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.alb-head input{flex:1 1 220px;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font:inherit;font-size:15px}
+.alb-head .num{font-size:13px;color:var(--muted)}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.th{position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:#eee}
+.th img{width:100%;height:100%;object-fit:cover;display:block}
+.th .cover{position:absolute;left:6px;top:6px;background:var(--rust);color:#fff;font-size:11px;padding:2px 8px;border-radius:99px}
+.th .tools{position:absolute;inset:auto 0 0 0;display:flex;justify-content:space-between;padding:5px;background:linear-gradient(transparent,rgba(0,0,0,.55))}
+.th .tools button{border:0;background:rgba(255,255,255,.9);border-radius:6px;width:28px;height:26px;font-size:13px;cursor:pointer}
+.th .tools button.x{background:#b3261e;color:#fff}
+.add{display:grid;place-items:center;aspect-ratio:4/3;border:2px dashed var(--line);border-radius:10px;color:var(--muted);font-size:14px;cursor:pointer;text-align:center}
+.add:hover{border-color:var(--ink);color:var(--ink)}
+.add input{display:none}
+.login{max-width:360px;margin:40px auto;text-align:center}
+.login input{width:100%;border:1px solid var(--line);border-radius:99px;padding:11px 18px;font-size:15px;margin:14px 0}
+.help{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:20px}
+</style>
+</head>
+<body data-page="gallery-admin">
+
+<div class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Admin</span>
+    <h1>사진 관리</h1>
+    <p>홈 화면 '함께한 순간들'의 사진 묶음을 추가·삭제·정리합니다.</p>
+  </div>
+</div>
+
+<section style="padding-top:40px">
+  <div class="wrap">
+    <form class="login" id="login">
+      <p>관리자 비밀번호를 입력해 주세요.</p>
+      <input type="password" id="pw" autocomplete="current-password" required>
+      <button class="gbtn primary">확인</button>
+      <div class="gmsg" id="lmsg" style="margin-top:10px"></div>
+    </form>
+
+    <div id="editor" hidden>
+      <div class="help">· 사진의 ★ 를 누르면 그 사진이 묶음의 대표 사진이 됩니다. ◀ ▶ 로 순서를 바꾸고, ✕ 로 지웁니다.<br>
+        · '사진 추가'로 여러 장을 한꺼번에 올릴 수 있습니다. (자동으로 알맞은 크기로 줄여서 올립니다)<br>
+        · 다 고친 뒤 꼭 <b>저장하기</b>를 눌러야 홈페이지에 반영됩니다.</div>
+      <div class="ga-bar">
+        <span style="display:flex;gap:8px;flex-wrap:wrap"><button class="gbtn" id="add-alb">+ 새 묶음 추가</button><a class="gbtn" href="index.html#gallery" target="_blank">홈에서 보기</a></span>
+        <span style="display:flex;gap:10px;align-items:center"><span class="gmsg" id="msg"></span><button class="gbtn primary" id="save">저장하기</button></span>
+      </div>
+      <div id="albums"></div>
+      <button class="gbtn" id="logout" style="margin-top:20px">관리자 나가기</button>
+    </div>
+  </div>
+</section>
+
+<script src="data.js"></script>
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+<script>
+(function () {
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s || "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const KEY = "abba-admin";
+  const getPw = () => { try { return sessionStorage.getItem(KEY) || ""; } catch (e) { return ""; } };
+  const setPw = v => { try { v ? sessionStorage.setItem(KEY, v) : sessionStorage.removeItem(KEY); } catch (e) {} };
+  let albums = [], dirty = false, busy = 0;
+  const mark = () => { dirty = true; $("msg").textContent = "저장하지 않은 변경 사항이 있습니다."; };
+  window.addEventListener("beforeunload", e => { if (dirty) { e.preventDefault(); e.returnValue = ""; } });
+
+  async function api(body) {
+    const r = await fetch("/api/gallery", body ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : { cache: "no-store" });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) { const e = new Error(j.error || "error"); e.status = r.status; throw e; }
+    return j;
+  }
+
+  function render() {
+    $("albums").innerHTML = albums.map((a, i) => `
+      <div class="alb" data-a="${i}">
+        <div class="alb-head">
+          <input data-f="caption" value="${esc(a.caption)}" placeholder="묶음 이름 (한국어)" maxlength="80">
+          <input data-f="caption_en" value="${esc(a.caption_en)}" placeholder="English title (optional)" maxlength="120">
+          <span class="num">${a.images.length}장</span>
+          <button class="gbtn" data-act="up" ${i === 0 ? "disabled" : ""}>↑</button>
+          <button class="gbtn" data-act="down" ${i === albums.length - 1 ? "disabled" : ""}>↓</button>
+          <button class="gbtn danger" data-act="del-alb">묶음 삭제</button>
+        </div>
+        <div class="thumbs">
+          ${a.images.map((u, k) => `<div class="th" data-k="${k}"><img src="${esc(u)}" alt="" loading="lazy">${k === 0 ? `<span class="cover">대표</span>` : ""}
+            <div class="tools"><span><button data-act="left" title="앞으로">◀</button> <button data-act="right" title="뒤로">▶</button></span><span>${k ? `<button data-act="cover" title="대표 사진으로">★</button> ` : ""}<button class="x" data-act="del" title="삭제">✕</button></span></div></div>`).join("")}
+          <label class="add">＋ 사진 추가<br><small>여러 장 선택 가능</small><input type="file" accept="image/*" multiple data-act="files"></label>
+        </div>
+      </div>`).join("");
+  }
+
+  $("albums").addEventListener("input", e => {
+    const f = e.target.dataset.f; if (!f) return;
+    albums[+e.target.closest(".alb").dataset.a][f] = e.target.value; mark();
+  });
+  $("albums").addEventListener("click", e => {
+    const b = e.target.closest("[data-act]"); if (!b || b.tagName === "INPUT") return;
+    const ai = +b.closest(".alb").dataset.a, A = albums[ai], act = b.dataset.act;
+    const th = b.closest(".th"), k = th ? +th.dataset.k : -1;
+    const swap = (arr, x, y) => { if (y < 0 || y >= arr.length) return; [arr[x], arr[y]] = [arr[y], arr[x]]; };
+    if (act === "up") swap(albums, ai, ai - 1);
+    else if (act === "down") swap(albums, ai, ai + 1);
+    else if (act === "del-alb") {
+      if (!b.dataset.armed) { b.dataset.armed = "1"; b.textContent = "한 번 더 누르면 삭제"; return; }
+      albums.splice(ai, 1);
+    }
+    else if (act === "left") swap(A.images, k, k - 1);
+    else if (act === "right") swap(A.images, k, k + 1);
+    else if (act === "cover") A.images.unshift(A.images.splice(k, 1)[0]);
+    else if (act === "del") A.images.splice(k, 1);
+    else return;
+    mark(); render();
+  });
+  $("albums").addEventListener("change", async e => {
+    if (e.target.dataset.act !== "files") return;
+    const A = albums[+e.target.closest(".alb").dataset.a];
+    const files = [...e.target.files]; e.target.value = "";
+    busy++; $("save").disabled = true;
+    for (let n = 0; n < files.length; n++) {
+      $("msg").textContent = `사진 올리는 중… (${n + 1}/${files.length})`;
+      try { A.images.push(await upload(files[n])); mark(); render(); }
+      catch (err) { $("msg").textContent = err.status === 401 ? "비밀번호가 맞지 않습니다." : `'${files[n].name}' 를 올리지 못했습니다.`; await new Promise(r => setTimeout(r, 1500)); }
+    }
+    busy--; if (!busy) { $("save").disabled = false; if (dirty) $("msg").textContent = "사진을 올렸습니다. 저장하기를 눌러 주세요."; }
+  });
+
+  async function upload(file) {
+    const bm = await createImageBitmap(file, { imageOrientation: "from-image" });
+    const s = Math.min(1, 1600 / Math.max(bm.width, bm.height));
+    const c = document.createElement("canvas"); c.width = Math.round(bm.width * s); c.height = Math.round(bm.height * s);
+    c.getContext("2d").drawImage(bm, 0, 0, c.width, c.height);
+    let q = 0.82, data;
+    do { data = c.toDataURL("image/jpeg", q).split(",")[1]; q -= 0.12; } while (data.length > 3.6e6 && q > 0.4);
+    const r = await fetch("/api/upload", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password: getPw(), name: "gallery-" + Date.now().toString(36), contentType: "image/jpeg", data }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || !j.url) { const err = new Error("upload"); err.status = r.status; throw err; }
+    return j.url;
+  }
+
+  $("add-alb").onclick = () => { albums.unshift({ caption: "", caption_en: "", images: [] }); mark(); render(); window.scrollTo({ top: $("albums").offsetTop - 140, behavior: "smooth" }); };
+  $("save").onclick = async () => {
+    $("save").disabled = true; $("msg").textContent = "저장 중…";
+    try {
+      const j = await api({ action: "save", password: getPw(), albums });
+      albums = j.albums.map(a => ({ ...a, images: [...a.images] })); dirty = false; render();
+      $("msg").textContent = "저장했습니다. 홈페이지에 바로 반영됩니다. ✓";
+    } catch (err) { $("msg").textContent = err.status === 401 ? "비밀번호가 맞지 않습니다. 다시 로그인해 주세요." : "저장하지 못했습니다. 잠시 후 다시 시도해 주세요."; if (err.status === 401) { setPw(""); show(); } }
+    $("save").disabled = false;
+  };
+  $("logout").onclick = () => { setPw(""); show(); };
+
+  async function start() {
+    let j = null; try { j = await api(); } catch (e) {}
+    const src = j && Array.isArray(j.albums) ? j.albums : (window.GALLERY || []);
+    albums = src.map(a => ({ caption: a.caption || "", caption_en: a.caption_en || "", images: (a.images || [a.image]).filter(Boolean) }));
+    render();
+  }
+  function show() {
+    const on = !!getPw();
+    $("login").hidden = on; $("editor").hidden = !on;
+    if (on) start();
+  }
+  $("login").addEventListener("submit", async e => {
+    e.preventDefault(); $("lmsg").textContent = "";
+    try { await api({ action: "check", password: $("pw").value }); setPw($("pw").value); $("pw").value = ""; show(); }
+    catch (err) { $("lmsg").textContent = err.status === 401 ? "비밀번호가 맞지 않습니다." : "확인하지 못했습니다. 잠시 후 다시 시도해 주세요."; }
+  });
+  show();
+})();
+</script>
+</body>
+</html>
