@@ -403,8 +403,8 @@ window.POSTS = [
     "title_en": "Joint worship with the Central Gyeonggi Presbytery Men's Mission Association",
     "excerpt": "중경기노회 남전도회 연합회 목사님과 장로님들이 아바홈을 찾아 열방의 형제자매들과 함께 예배했습니다.",
     "excerpt_en": "Pastors and elders of the Central Gyeonggi Presbytery Men's Mission Association visited Abba Home and worshiped with our brothers and sisters from the nations.",
-    "body": "2025년 6월 1일, 중경기노회 남전도회 연합회가 아바홈을 찾아 연합예배를 드렸습니다.\n여러 교회의 목사님과 장로님, 집사님들이 아바홈 거실을 가득 채웠고, 스리랑카·인도·아프리카 등 열방에서 온 형제자매들과 한자리에서 찬양하고 말씀을 나누었습니다.\n안산에 들어온 열방의 이웃들을 향한 하나님의 마음을 함께 품고, 이 사역을 위해 기도와 동역으로 함께해 주시는 모든 분들께 감사드립니다.",
-    "body_en": "On June 1, 2025, the Central Gyeonggi Presbytery Men's Mission Association visited Abba Home for a joint worship service.\nPastors, elders and deacons from many churches filled our living room, praising and sharing the Word together with brothers and sisters from Sri Lanka, India, Africa and beyond.\nThank you to everyone who shares God's heart for the nations who have come to Ansan, and who partners with this ministry in prayer.",
+    "body": "2025년 6월 1일, 중경기노회 남전도회 연합회가 아바홈을 찾아 연합예배를 드렸습니다.\n여러 교회의 목사님과 장로님, 집사님들이 아바홈을 가득 채웠고, 스리랑카·인도·아프리카 등 열방에서 온 형제자매들과 한자리에서 찬양하고 말씀을 나누었습니다.\n안산에 들어온 열방의 이웃들을 향한 하나님의 마음을 함께 품고, 이 사역을 위해 기도와 동역으로 함께해 주시는 모든 분들께 감사드립니다.",
+    "body_en": "On June 1, 2025, the Central Gyeonggi Presbytery Men's Mission Association visited Abba Home for a joint worship service.\nPastors, elders and deacons from many churches filled Abba Home, praising and sharing the Word together with brothers and sisters from Sri Lanka, India, Africa and beyond.\nThank you to everyone who shares God's heart for the nations who have come to Ansan, and who partners with this ministry in prayer.",
     "images": [
       "images/namjeondo-2025-01.jpg"
     ]
@@ -478,83 +478,91 @@ window.POSTS = [
 /* ---------- 활동 사진 갤러리 (일상 이야기) ---------- */
 window.GALLERY = [
   {
-    "image": "images/daily-01.jpg",
+    "image": "images/worship-cover.jpg",
     "images": [
+      "images/worship-cover.jpg",
+      "images/itaewon-04.jpg",
+      "images/w100-01.jpg",
+      "images/hallelujah-03.jpg",
+      "images/daily-08.jpg",
+      "images/unity-04.jpg",
+      "images/yeshua24-04.jpg",
       "images/daily-01.jpg",
       "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-worship1-tAsXr72Kb4voup8SXlLO4cuHU8slNN.jpg",
-      "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-worship2-1gedJy2OvHqGYgetFapkd1orZ8ompX.jpg",
-      "images/daily-08.jpg",
-      "images/graduation-04.jpg",
-      "images/graduation-05.jpg"
+      "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-worship2-1gedJy2OvHqGYgetFapkd1orZ8ompX.jpg"
     ],
-    "caption": "목요일 저녁, 거실에서 드리는 예배",
-    "caption_en": "Thursday evening worship in the living room"
+    "caption": "목요일 저녁, 아바홈에서 드리는 예배",
+    "caption_en": "Thursday evening worship at Abba Home"
   },
   {
     "image": "images/namjeondo-2025-01.jpg",
     "images": [
       "images/namjeondo-2025-01.jpg",
-      "images/anniv-01.jpg",
-      "images/anniv-02.jpg",
+      "images/daily-07.jpg",
+      "images/newyear-01.jpg",
+      "images/ar-01.jpg",
+      "images/easter25-02.jpg",
+      "images/outing-03.jpg",
       "images/unity-01.jpg",
-      "images/xmas-01.jpg"
+      "images/anniv-05.jpg"
     ],
     "caption": "함께 모인 아바홈 가족",
     "caption_en": "The Abba Home family together"
   },
   {
-    "image": "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-food1-uLtMwnj1QvCkHX5TXqj2ZZ9ewhDKQ2.jpg",
+    "image": "images/easter25-04.jpg",
     "images": [
-      "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-food1-uLtMwnj1QvCkHX5TXqj2ZZ9ewhDKQ2.jpg",
-      "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-food2-tCiSdhRlRQK7goAyiNfEPYW7uNWcNz.jpg",
-      "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-food3-u1C3SMDsLZxumY03tULRNLTpsUckWH.jpg",
-      "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-food5-fEuQvto4Oz5AgbBuweEfBCaU5klsC0.jpg",
-      "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-food6-v02WzgGZO1guunagpYfRQCGGw8axSj.jpg",
-      "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-food4-gfqgSCTzZJeA8hBkOmuY2ufMCBGC3a.jpg",
-      "images/daily-05.jpg"
-    ],
-    "caption": "식탁 위의 정성",
-    "caption_en": "Made with love"
-  },
-  {
-    "image": "images/daily-06.jpg",
-    "images": [
+      "images/easter25-04.jpg",
+      "images/anniv-02.jpg",
+      "images/hallelujah-04.jpg",
+      "images/michael-01.jpg",
+      "images/newyear-03.jpg",
+      "images/newyear-04.jpg",
+      "images/itaewon-02.jpg",
       "images/daily-06.jpg",
-      "images/daily-07.jpg",
-      "images/newyear-02.jpg"
+      "https://ipyli8itohcwwbky.public.blob.vercel-storage.com/media/gallery-food5-fEuQvto4Oz5AgbBuweEfBCaU5klsC0.jpg"
     ],
-    "caption": "오늘의 셰프",
-    "caption_en": "Today's chef"
+    "caption": "함께 나누는 식탁",
+    "caption_en": "Sharing the table"
   },
   {
-    "image": "images/daily-03.jpg",
+    "image": "images/graduation-04.jpg",
     "images": [
-      "images/daily-03.jpg",
+      "images/graduation-04.jpg",
+      "images/itaewon-01.jpg",
+      "images/graduation-05.jpg",
+      "images/yeshua24-02.jpg",
+      "images/anniv-04.jpg",
+      "images/unity-02.jpg",
+      "images/hallelujah-02.jpg"
+    ],
+    "caption": "찬양으로 여는 저녁",
+    "caption_en": "An evening opened with praise"
+  },
+  {
+    "image": "images/grape-04.jpg",
+    "images": [
+      "images/grape-04.jpg",
       "images/outing-01.jpg",
+      "images/garden-04.jpg",
       "images/outing-02.jpg",
-      "images/pool-01.jpg"
-    ],
-    "caption": "반가운 만남",
-    "caption_en": "Happy to see you"
-  },
-  {
-    "image": "images/daily-02.jpg",
-    "images": [
-      "images/daily-02.jpg",
       "images/grape-01.jpg",
-      "images/grape-02.jpg",
-      "images/ganghwa-01.jpg"
+      "images/easter25-03.jpg",
+      "images/anniv-03.jpg",
+      "images/outing-04.jpg"
     ],
-    "caption": "아바홈의 가을",
-    "caption_en": "Autumn at Abba Home"
+    "caption": "자연 속에서 함께",
+    "caption_en": "Together in nature"
   },
   {
     "image": "images/seollal-04.jpg",
     "images": [
       "images/seollal-04.jpg",
       "images/seollal-01.jpg",
-      "images/newyear-03.jpg",
-      "images/newyear-04.jpg"
+      "images/seollal-02.jpg",
+      "images/seollal-03.jpg",
+      "images/xmas-01.jpg",
+      "images/newyear-02.jpg"
     ],
     "caption": "명절을 함께",
     "caption_en": "Holidays together"
@@ -563,12 +571,38 @@ window.GALLERY = [
     "image": "images/srilanka-01.jpg",
     "images": [
       "images/srilanka-01.jpg",
+      "images/srilanka-02.jpg",
+      "images/srilanka-03.jpg",
       "images/pakistan-01.jpg",
-      "images/itaewon-01.jpg",
-      "images/yeshua24-01.jpg"
+      "images/pakistan-02.jpg",
+      "images/ganghwa-01.jpg",
+      "images/ganghwa-03.jpg",
+      "images/tangtang5-01.jpg"
     ],
     "caption": "열방을 향한 발걸음",
     "caption_en": "Steps toward the nations"
+  },
+  {
+    "image": "images/garden-01.jpg",
+    "images": [
+      "images/garden-01.jpg",
+      "images/newyear-05.jpg",
+      "images/abbafc-02.jpg",
+      "images/pool-02.jpg"
+    ],
+    "caption": "아이들과 함께",
+    "caption_en": "With the children"
+  },
+  {
+    "image": "images/ganghwa-04.jpg",
+    "images": [
+      "images/ganghwa-04.jpg",
+      "images/graduation-01.jpg",
+      "images/graduation-03.jpg",
+      "images/anniv-01.jpg"
+    ],
+    "caption": "축하와 감사의 순간",
+    "caption_en": "Moments of celebration"
   }
 ];
 
