@@ -547,7 +547,7 @@ window.NATIONS = [
   { code: "CN", name: "중국", name_en: "China", name_zh: "中国", name_fr: "Chine", name_si: "චීනය" },
   { code: "MN", name: "몽골", name_en: "Mongolia", name_zh: "蒙古", name_fr: "Mongolie", name_si: "මොංගෝලියාව" },
   { code: "MG", name: "마다가스카르", name_en: "Madagascar", name_zh: "马达加斯加", name_fr: "Madagascar", name_si: "මඩගස්කරය" },
-  { code: "CG", name: "콩고공화국", name_en: "Republic of the Congo", name_zh: "刚果共和国", name_fr: "République du Congo", name_si: "කොංගෝ ජනරජය" },
+  { code: "CD", name: "콩고민주공화국", name_en: "Democratic Republic of the Congo", name_zh: "刚果民主共和国", name_fr: "République démocratique du Congo", name_si: "කොංගෝ ප්‍රජාතන්ත්‍රවාදී ජනරජය" },
   { code: "NG", name: "나이지리아", name_en: "Nigeria", name_zh: "尼日利亚", name_fr: "Nigeria", name_si: "නයිජීරියාව" },
   { code: "EG", name: "이집트", name_en: "Egypt", name_zh: "埃及", name_fr: "Égypte", name_si: "ඊජිප්තුව" },
   { code: "US", name: "미국", name_en: "United States", name_zh: "美国", name_fr: "États-Unis", name_si: "එක්සත් ජනපදය" },
