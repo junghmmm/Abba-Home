@@ -10,6 +10,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@500;600&family=Noto+Sans+Sinhala:wght@400;500;600&family=Noto+Serif+Sinhala:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
+.sch-search{position:relative;margin:0 0 26px}
+.sch-search input{width:100%;border:1px solid var(--line);border-radius:99px;padding:13px 20px 13px 46px;font-size:15px;background:#fff;color:var(--ink)}
+.sch-search input:focus{outline:none;border-color:var(--ink)}
+.sch-search::before{content:"⌕";position:absolute;left:18px;top:50%;transform:translateY(-52%);font-size:20px;color:var(--muted)}
+.sr-box{margin:-12px 0 30px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:8px 6px;max-height:420px;overflow:auto}
+.sr-box[hidden]{display:none}
+.sr-h{font-size:13px;color:var(--muted);padding:6px 14px}
+.sr-item{display:flex;gap:16px;width:100%;text-align:left;background:none;border:0;padding:10px 14px;border-radius:10px;cursor:pointer;color:var(--ink);font-size:14.5px}
+.sr-item:hover{background:rgba(60,40,30,.06)}
+.sr-item .d{min-width:96px;font-variant-numeric:tabular-nums;color:var(--rust);font-weight:600}
+.sr-item .s{display:block;color:var(--muted);font-size:13px}
+.sr-item mark{background:#ffe9a8;color:inherit;border-radius:3px}
+.cal .day.hit{box-shadow:inset 0 0 0 2px var(--rust)}
 .cal-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:22px}
 .cal-bar h2{font-family:var(--serif);font-size:30px;font-weight:600;min-width:200px}
 .cal-nav{display:flex;gap:8px;align-items:center}
@@ -81,6 +94,8 @@ body.is-admin .cal .day:hover{background:#fffaf3}
   <div class="wrap">
     <div class="admin-bar"><span id="admin-msg">관리자 모드 · 날짜를 누르면 일정을 추가하고, 일정을 누르면 수정·삭제할 수 있습니다.</span>
       <span style="display:flex;gap:8px"><button class="sch-btn primary" id="btn-add">+ 일정 추가</button><button class="sch-btn" id="btn-logout">관리자 나가기</button></span></div>
+    <div class="sch-search"><input type="search" id="sch-q" autocomplete="off"></div>
+    <div class="sr-box" id="sr-box" hidden></div>
     <div class="cal-bar">
       <h2 id="cal-title"></h2>
       <div class="cal-nav">
@@ -149,6 +164,13 @@ body.is-admin .cal .day:hover{background:#fffaf3}
   };
   const L = T[lang] || T.ko;
   const $ = id => document.getElementById(id);
+  const S = {
+    ko: { ph: "지난 일정 검색 · 예: 성탄, 운동회, 교도소, 스리랑카", res: n => `검색 결과 ${n}건 · 누르면 그 달로 이동합니다`, none: "찾는 일정이 없습니다." },
+    en: { ph: "Search past events · e.g. Christmas, sports day, Sri Lanka", res: n => `${n} result(s) · tap to jump to that month`, none: "No matching events." },
+    zh: { ph: "搜索过往活动 · 例如：圣诞、运动会、斯里兰卡", res: n => `共 ${n} 条 · 点击跳转到该月`, none: "没有找到相关活动。" },
+    fr: { ph: "Rechercher un événement · ex. Noël, Sri Lanka", res: n => `${n} résultat(s) · touchez pour aller au mois`, none: "Aucun événement trouvé." },
+    si: { ph: "පසුගිය සිදුවීම් සොයන්න · උදා: නත්තල, ශ්‍රී ලංකාව", res: n => `ප්‍රතිඵල ${n} · මාසයට යාමට තට්ටු කරන්න`, none: "ගැළපෙන සිදුවීම් නැත." }
+  }[lang] || null;
   const esc = s => String(s || "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const locale = { ko: "ko-KR", en: "en-US", zh: "zh-CN", fr: "fr-FR", si: "si-LK" }[lang] || "ko-KR";
   const pad = n => String(n).padStart(2, "0");
@@ -263,6 +285,34 @@ body.is-admin .cal .day:hover{background:#fffaf3}
   $("up-list").addEventListener("click", ev => {
     const b = ev.target.closest(".up-item"); if (!b) return;
     const e = events.find(x => x.id === b.dataset.id); if (e) admin() ? openEdit(e) : openView(e);
+  });
+  /* 검색 */
+  const SS = S || { ph: "", res: n => n, none: "" };
+  const q = $("sch-q"), box = $("sr-box");
+  q.placeholder = SS.ph;
+  const norm = x => String(x || "").toLowerCase().replace(/\s+/g, "");
+  const hi = (txt, w) => { const t = String(txt || ""); if (!w) return esc(t); const i = t.toLowerCase().indexOf(w); return i < 0 ? esc(t) : esc(t.slice(0, i)) + "<mark>" + esc(t.slice(i, i + w.length)) + "</mark>" + esc(t.slice(i + w.length)); };
+  let hitDate = "";
+  function search() {
+    const raw = q.value.trim(), w = norm(raw);
+    if (!w) { box.hidden = true; box.innerHTML = ""; return; }
+    const terms = raw.toLowerCase().split(/\s+/).filter(Boolean);
+    const hits = events.filter(e => { const hay = norm([e.title, e.place, e.note, e.date].join(" ")); return terms.every(t => hay.includes(norm(t))); })
+      .sort((a, b) => b.date.localeCompare(a.date)).slice(0, 80);
+    const t0 = terms[0] || "";
+    box.innerHTML = hits.length
+      ? `<div class="sr-h">${esc(SS.res(hits.length))}</div>` + hits.map(e => `<button class="sr-item" data-id="${esc(e.id)}"><span class="d">${esc(e.date.replace(/-/g, "."))}</span><span>${hi(e.title, t0)}<span class="s">${esc([e.time, e.place].filter(Boolean).join(" · "))}</span></span></button>`).join("")
+      : `<div class="sr-h">${esc(SS.none)}</div>`;
+    box.hidden = false;
+  }
+  q.addEventListener("input", search);
+  box.addEventListener("click", ev => {
+    const b = ev.target.closest(".sr-item"); if (!b) return;
+    const e = events.find(x => x.id === b.dataset.id); if (!e) return;
+    view = parse(e.date); view.setDate(1); hitDate = e.date; render();
+    const cell = document.querySelector(`.day[data-date="${e.date}"]`);
+    if (cell) { cell.classList.add("hit"); cell.scrollIntoView({ behavior: "smooth", block: "center" }); }
+    admin() ? openEdit(e) : openView(e);
   });
   $("prev").onclick = () => { view.setMonth(view.getMonth() - 1); render(); };
   $("next").onclick = () => { view.setMonth(view.getMonth() + 1); render(); };
