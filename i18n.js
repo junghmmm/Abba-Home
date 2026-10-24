@@ -12,6 +12,16 @@ window.LANGS = [
 ];
 
 window.I18N = {
+  /* ---------- 함께한 나라들 / 유튜브 ---------- */
+  "foot.yt": { ko: "아바홈 공식 유튜브", en: "Official YouTube channel", zh: "官方 YouTube 频道", fr: "Chaîne YouTube officielle", si: "නිල YouTube නාලිකාව" },
+  "home.nat.h2": { ko: "<span id=\"nation-count\">14</span>개 나라, 한 가족", en: "<span id=\"nation-count\">14</span> nations, one family", zh: "<span id=\"nation-count\">14</span>个国家，一个家", fr: "<span id=\"nation-count\">14</span> nations, une seule famille", si: "ජාතීන් <span id=\"nation-count\">14</span>ක්, එක් පවුලක්" },
+  "home.nat.p": {
+    ko: "지금까지 이 나라들에서 온 형제자매들이 아바홈에서 함께 예배하고 식탁을 나누었습니다. 그들의 삶을 통해 각 나라에 복음의 씨앗이 심겼고, 지금도 자라고 있습니다.",
+    en: "Brothers and sisters from these nations have worshiped and shared the table with us at Abba Home. Through their lives the seed of the gospel has been planted in each of these nations — and it is still growing.",
+    zh: "至今，来自这些国家的弟兄姊妹在Abba Home一同敬拜、同桌用餐。借着他们的生命，福音的种子已撒在各自的国家，并且仍在成长。",
+    fr: "Des frères et sœurs venus de ces nations ont adoré et partagé la table avec nous à Abba Home. À travers leur vie, la semence de l’Évangile a été plantée dans chacune de ces nations — et elle continue de grandir.",
+    si: "මෙම රටවලින් පැමිණි සහෝදර සහෝදරියන් Abba Home හි අප සමඟ නමස්කාර කර එකම මේසයේ ආහාර බෙදා ගත්හ. ඔවුන්ගේ ජීවිත තුළින් එක් එක් රටේ ශුභාරංචියේ බීජ රෝපණය වී ඇති අතර, ඒවා තවමත් වර්ධනය වෙමින් පවතී."
+  },
   /* ---------- 공통 ---------- */
   "nav.home": { ko: "홈", en: "Home", zh: "首页", fr: "Accueil", si: "මුල් පිටුව" },
   "nav.about": { ko: "소개", en: "About", zh: "关于我们", fr: "À propos", si: "අප ගැන" },

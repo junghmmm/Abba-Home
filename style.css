@@ -346,3 +346,15 @@ html:lang(fr) .hero h1,html:lang(en) .hero h1{font-size:clamp(38px,6.2vw,84px)}
 .foot-copy{background:none;border:1px solid #4a3f37;color:#d8cbbd;border-radius:99px;padding:3px 11px;font-size:12px;font-family:var(--sans)}
 .foot-copy:hover{border-color:#f3e9de;color:#fff}
 @media (max-width:960px) and (min-width:761px){.foot-grid{grid-template-columns:1fr 1fr}}
+
+/* footer youtube */
+.foot-yt{display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:8px 16px 8px 12px;border-radius:99px;background:#c4302b;color:#fff;font-size:13.5px;font-weight:500;transition:background .2s}
+.foot-yt:hover{background:#e0362f;color:#fff}
+.foot-yt svg{width:20px;height:20px;fill:#fff;flex:none}
+
+/* nations */
+.nations-sec{padding-top:0}
+.nations{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.nation{display:flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid rgba(60,40,30,.14);border-radius:14px;background:rgba(255,255,255,.55);font-weight:500}
+.nation .flag{font-size:26px;line-height:1}
+@media (max-width:760px){.nations{grid-template-columns:repeat(2,1fr);gap:10px}.nation{padding:12px 14px}}

@@ -11,7 +11,8 @@
 
 window.SITE = {
   email: "abbahomeherennow@gmail.com",
-  phone: "010-8783-9253"
+  phone: "010-8783-9253",
+  youtube: "https://www.youtube.com/@abbahome-jesus"
 };
 
 /* ---------- 사역 (사역소개 + 게시판 카테고리) ---------- */
@@ -142,7 +143,11 @@ window.POSTS = [
     "excerpt_en": "We pray and partner with a team planting a church for Sri Lankan brothers and sisters in Wongok-dong, Ansan.",
     "body": "한국에는 약 4만 명의 스리랑카 사람들이 살고 있고, 그중 많은 이들이 안산과 수도권 산업단지에서 이주노동자로 일하고 있습니다.\n아바홈은 지난 성탄 때 스리랑카 교회세우기팀 목사님들과 함께 예배한 것을 시작으로, 원곡동에 스리랑카 교회와 예배 처소가 세워지도록 함께 기도해 왔습니다. 9월 6일 오후에는 개척팀의 예배에 함께했습니다.\n이 사역에 기도와 후원으로 함께해 주세요.",
     "body_en": "About 40,000 Sri Lankans live in Korea, many working as migrant workers in Ansan and the industrial areas around Seoul.\nSince worshiping with the Sri Lankan church-planting pastors last Christmas, Abba Home has been praying for a Sri Lankan church and a place of worship in Wongok-dong. On the afternoon of September 6 we joined the planting team's worship service.\nPlease join this ministry with your prayers and support.",
-    "images": []
+    "images": [
+      "images/srilanka-01.jpg",
+      "images/srilanka-02.jpg",
+      "images/srilanka-03.jpg"
+    ]
   },
   {
     "id": "2026-08-unity",
@@ -391,6 +396,20 @@ window.POSTS = [
     ]
   },
   {
+    "id": "2025-06-namjeondo",
+    "ministry": "worship",
+    "date": "2025-06-01",
+    "title": "중경기노회 남전도회 연합회 예배",
+    "title_en": "Joint worship with the Central Gyeonggi Presbytery Men's Mission Association",
+    "excerpt": "중경기노회 남전도회 연합회 목사님과 장로님들이 아바홈을 찾아 열방의 형제자매들과 함께 예배했습니다.",
+    "excerpt_en": "Pastors and elders of the Central Gyeonggi Presbytery Men's Mission Association visited Abba Home and worshiped with our brothers and sisters from the nations.",
+    "body": "2025년 6월 1일, 중경기노회 남전도회 연합회가 아바홈을 찾아 연합예배를 드렸습니다.\n여러 교회의 목사님과 장로님, 집사님들이 아바홈 거실을 가득 채웠고, 스리랑카·인도·아프리카 등 열방에서 온 형제자매들과 한자리에서 찬양하고 말씀을 나누었습니다.\n안산에 들어온 열방의 이웃들을 향한 하나님의 마음을 함께 품고, 이 사역을 위해 기도와 동역으로 함께해 주시는 모든 분들께 감사드립니다.",
+    "body_en": "On June 1, 2025, the Central Gyeonggi Presbytery Men's Mission Association visited Abba Home for a joint worship service.\nPastors, elders and deacons from many churches filled our living room, praising and sharing the Word together with brothers and sisters from Sri Lanka, India, Africa and beyond.\nThank you to everyone who shares God's heart for the nations who have come to Ansan, and who partners with this ministry in prayer.",
+    "images": [
+      "images/namjeondo-2025-01.jpg"
+    ]
+  },
+  {
     "id": "2025-04-abbafc",
     "ministry": "joy",
     "date": "2025-04-26",
@@ -464,7 +483,7 @@ window.GALLERY = [
     "caption_en": "Thursday evening worship in the living room"
   },
   {
-    "image": "images/daily-07.jpg",
+    "image": "images/namjeondo-2025-01.jpg",
     "caption": "함께 모인 아바홈 가족",
     "caption_en": "The Abba Home family together"
   },
@@ -518,4 +537,24 @@ window.GALLERY = [
     "caption": "설날 윷놀이",
     "caption_en": "Yut game on Lunar New Year"
   }
+];
+
+/* ---------- 함께한 나라들 (홈 'All Nations' 섹션) ----------
+   새 나라는 code(국가코드 2자리)와 이름을 추가하세요.
+------------------------------------------- */
+window.NATIONS = [
+  { code: "PH", name: "필리핀", name_en: "Philippines", name_zh: "菲律宾", name_fr: "Philippines", name_si: "පිලිපීනය" },
+  { code: "CN", name: "중국", name_en: "China", name_zh: "中国", name_fr: "Chine", name_si: "චීනය" },
+  { code: "MN", name: "몽골", name_en: "Mongolia", name_zh: "蒙古", name_fr: "Mongolie", name_si: "මොංගෝලියාව" },
+  { code: "MG", name: "마다가스카르", name_en: "Madagascar", name_zh: "马达加斯加", name_fr: "Madagascar", name_si: "මඩගස්කරය" },
+  { code: "CG", name: "콩고공화국", name_en: "Republic of the Congo", name_zh: "刚果共和国", name_fr: "République du Congo", name_si: "කොංගෝ ජනරජය" },
+  { code: "NG", name: "나이지리아", name_en: "Nigeria", name_zh: "尼日利亚", name_fr: "Nigeria", name_si: "නයිජීරියාව" },
+  { code: "EG", name: "이집트", name_en: "Egypt", name_zh: "埃及", name_fr: "Égypte", name_si: "ඊජිප්තුව" },
+  { code: "US", name: "미국", name_en: "United States", name_zh: "美国", name_fr: "États-Unis", name_si: "එක්සත් ජනපදය" },
+  { code: "KH", name: "캄보디아", name_en: "Cambodia", name_zh: "柬埔寨", name_fr: "Cambodge", name_si: "කාම්බෝජය" },
+  { code: "BI", name: "부룬디", name_en: "Burundi", name_zh: "布隆迪", name_fr: "Burundi", name_si: "බුරුන්ඩි" },
+  { code: "LK", name: "스리랑카", name_en: "Sri Lanka", name_zh: "斯里兰卡", name_fr: "Sri Lanka", name_si: "ශ්‍රී ලංකාව" },
+  { code: "IN", name: "인도", name_en: "India", name_zh: "印度", name_fr: "Inde", name_si: "ඉන්දියාව" },
+  { code: "PK", name: "파키스탄", name_en: "Pakistan", name_zh: "巴基斯坦", name_fr: "Pakistan", name_si: "පාකිස්තානය" },
+  { code: "RU", name: "러시아", name_en: "Russia", name_zh: "俄罗斯", name_fr: "Russie", name_si: "රුසියාව" }
 ];

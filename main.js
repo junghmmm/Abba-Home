@@ -101,6 +101,7 @@
         <div>
           <div class="brand"><b>Abba Home Here &amp; Now</b><small>${esc(t("tagline"))}</small></div>
           <p style="margin-top:18px;max-width:340px">${esc(t("foot.desc"))}</p>
+          ${S.youtube ? `<a class="foot-yt" href="${esc(S.youtube)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15.1V8.9l5.8 3.1-5.8 3.1z"/></svg>${esc(t("foot.yt"))}</a>` : ""}
         </div>
         <div>
           <h5>VISIT</h5>
@@ -132,6 +133,14 @@
       </div>
     </div>`;
   document.body.append(footer);
+
+  /* ---------- nations ---------- */
+  const natWrap = $("#nations");
+  if (natWrap) {
+    const flag = c => c.toUpperCase().replace(/./g, ch => String.fromCodePoint(127397 + ch.charCodeAt(0)));
+    natWrap.innerHTML = (window.NATIONS || []).map(n => `<li class="nation reveal"><span class="flag" aria-hidden="true">${flag(n.code)}</span><span>${esc(lang === "ko" ? n.name : (n["name_" + lang] || n.name_en || n.name))}</span></li>`).join("");
+    const cnt = $("#nation-count"); if (cnt) cnt.textContent = (window.NATIONS || []).length;
+  }
 
   /* ---------- ministries (home cards) ---------- */
   const minCards = $("#min-cards");
