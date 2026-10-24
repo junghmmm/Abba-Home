@@ -15,7 +15,7 @@ const esc = s => String(s || "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": 
 const paras = s => String(s || "").split(/\n+/).filter(Boolean).map(p => `<p>${esc(p)}</p>`).join("\n");
 const minName = id => (MIN.find(m => m.id === id) || {}).name || "";
 const minNameEn = id => (MIN.find(m => m.id === id) || {}).name_en || "";
-const abs = u => u ? SITE_URL + "/" + u.replace(/^\//, "") : "";
+const abs = u => !u ? "" : /^https?:/.test(u) ? u : SITE_URL + "/" + u.replace(/^\//, "");
 const today = new Date().toISOString().slice(0, 10);
 
 fs.mkdirSync(path.join(OUT, "news"), { recursive: true });
@@ -112,7 +112,7 @@ ${POSTS.map(p => `<item>
 fs.writeFileSync(path.join(OUT, "rss.xml"), rss);
 
 /* sitemap.xml */
-const pages = [["", "1.0", "weekly", today], ["about", "0.8", "monthly", today], ["ministries", "0.8", "monthly", today], ["news", "0.9", "weekly", today], ["schedule", "0.6", "weekly", today], ["contact", "0.5", "yearly", today]];
+const pages = [["", "1.0", "weekly", today], ["about", "0.8", "monthly", today], ["ministries", "0.8", "monthly", today], ["news", "0.9", "weekly", today], ["schedule", "0.6", "weekly", today], ["prayer", "0.6", "weekly", today], ["contact", "0.5", "yearly", today]];
 const urls = pages.map(([u, pr, f, d]) => ({ loc: `${SITE_URL}/${u}`, pr, f, d }))
   .concat(POSTS.map(p => ({ loc: `${SITE_URL}/news/${p.id}`, pr: "0.7", f: "monthly", d: p.date })));
 fs.writeFileSync(path.join(OUT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
