@@ -498,7 +498,6 @@ window.GALLERY = [
     "image": "images/namjeondo-2025-01.jpg",
     "images": [
       "images/namjeondo-2025-01.jpg",
-      "images/daily-07.jpg",
       "images/newyear-01.jpg",
       "images/ar-01.jpg",
       "images/easter25-02.jpg",
