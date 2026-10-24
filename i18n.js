@@ -28,6 +28,7 @@ window.I18N = {
   "nav.ministries": { ko: "사역", en: "Ministries", zh: "事工", fr: "Ministères", si: "සේවාවන්" },
   "nav.news": { ko: "사역소식", en: "News", zh: "事工消息", fr: "Actualités", si: "පුවත්" },
   "nav.schedule": { ko: "일정", en: "Schedule", zh: "日程", fr: "Agenda", si: "දින දර්ශනය" },
+  "nav.prayer": { ko: "기도요청", en: "Prayer", zh: "代祷", fr: "Prière", si: "යාච්ඤා ඉල්ලීම" },
   "nav.contact": { ko: "문의하기", en: "Contact", zh: "联系我们", fr: "Contact", si: "අමතන්න" },
 
   "foot.desc": {
@@ -107,10 +108,10 @@ window.I18N = {
     si: "සෑම බ්‍රහස්පතින්දාවකම<br>ජාතීන් එකම මේසයක් වටා එක්රැස් වෙති"
   },
   "home.w.p": {
-    en: "Beyond nationality and culture, we share a meal and worship together. Whether it’s your first time or your Korean is still growing, everyone is welcome.",
-    zh: "跨越国籍与文化，我们一同用餐、一同敬拜。无论是第一次来，还是韩语还不太流利，都热烈欢迎。",
-    fr: "Au-delà des nationalités et des cultures, nous partageons un repas et adorons ensemble. Que ce soit votre première visite ou que votre coréen soit encore hésitant, vous êtes le bienvenu.",
-    si: "ජාතිකත්වය හා සංස්කෘතිය ඉක්මවා අපි එකට ආහාර බෙදාගෙන එකට නමස්කාර කරමු. ඔබ පළමු වරට පැමිණියත්, කොරියානු භාෂාව තවමත් හොඳින් නොදැන සිටියත්, සැමට සාදරයෙන් පිළිගනිමු."
+    en: "We sit around together in a relaxed, homey atmosphere, share a meal, and praise and worship in Korean and English. Any nationality, any language, first time or not — everyone is welcome!",
+    zh: "我们在轻松温馨的氛围中围坐在一起，一同用餐，用韩语和英语赞美、敬拜。无论国籍、语言，即使是第一次来也没关系——欢迎每一个人！",
+    fr: "Assis en cercle dans une ambiance détendue, nous partageons un repas puis louons et adorons en coréen et en anglais. Quelle que soit votre nationalité ou votre langue, même pour une première visite, tout le monde est le bienvenu !",
+    si: "සැහැල්ලු නිවසක වාතාවරණයක එකට වටකර වාඩි වී, ආහාර බෙදාගෙන, කොරියානු සහ ඉංග්‍රීසි භාෂාවෙන් ප්‍රශංසා කර නමස්කාර කරමු. ජාතිය, භාෂාව කුමක් වුවත්, පළමු වරට වුවත් — සැමට සාදරයෙන් පිළිගනිමු!"
   },
   "home.w.t1b": { en: "Shared Table", zh: "共享餐桌", fr: "Repas partagé", si: "එකට ආහාර" },
   "home.w.t1s": { en: "Every Thursday · Dinner provided", zh: "每周四 · 提供晚餐", fr: "Chaque jeudi · Repas offert", si: "සෑම බ්‍රහස්පතින්දාවකම · රාත්‍රී ආහාර ලබා දේ" },
