@@ -33,7 +33,7 @@ window.MINISTRIES = [
     schedule_zh: "每周四 19:30 敬拜 · 18:30 起用餐",
     schedule_fr: "Culte chaque jeudi à 19h30 · Repas dès 18h30",
     schedule_si: "සෑම බ්‍රහස්පතින්දාවකම ප.ව. 7:30 නමස්කාරය · ප.ව. 6:30 සිට ආහාර",
-    image: "images/yeshua24-02.jpg"
+    image: "images/worship-cover.jpg"
   },
   {
     id: "tangtang",
