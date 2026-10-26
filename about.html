@@ -123,11 +123,64 @@ html[lang="ko"] .en-only{display:none}
       <h3 style="margin-top:12px" data-i18n="leader.name">남동현 목사</h3>
       <div class="role"><span data-i18n="leader.title">대표</span> · Abba Home Here &amp; Now</div>
       <p data-i18n="about.leader.p">안산의 다문화 이웃들과 함께 예배하며, 다민족 가정과 교회, 선교적 리더들을 섬기고 있습니다. 아바홈은 잃었다가 다시 얻은 아들을 맞이하는 아버지의 집처럼, 누구든 돌아와 쉬고 회복되어 다시 보냄 받는 공동체가 되기를 소망합니다.</p>
-      <p style="margin-top:28px"><a class="btn btn-dark" href="contact.html" data-i18n="about.leader.btn">함께하기 · 문의하기</a></p>
+      <ul class="lead-hl">
+        <li><b>D.Min.</b><span>Asbury Theological Seminary</span></li>
+        <li><b>Ph.D. h.c.</b><span>Chilchil Global University</span></li>
+        <li><b>30<small>+</small></b><span class="ko-only">년 사역 · 아시아·북미·유럽</span><span class="en-only">years of ministry · Asia, N. America, Europe</span></li>
+      </ul>
+      <p style="margin-top:28px;display:flex;gap:10px;flex-wrap:wrap"><button type="button" class="btn" id="open-profile" style="border:1px solid var(--ink);background:transparent;cursor:pointer"><span class="ko-only">프로필 자세히 보기</span><span class="en-only">View full profile</span></button><a class="btn btn-dark" href="contact.html" data-i18n="about.leader.btn">함께하기 · 문의하기</a></p>
     </div>
   </div>
 </section>
 
+<dialog class="profile-dlg" id="profile">
+  <button type="button" class="pd-close" aria-label="Close">×</button>
+  <div class="pd-head"><div class="pd-ph" style="background-image:url('images/leader-nam2.jpg'),url('images/leader-nam.jpg')"></div>
+    <div><span class="eyebrow" style="color:var(--rust);opacity:1">Profile</span><h3><span class="ko-only">남동현 목사</span><span class="en-only">Rev. Dong-hyun Nam</span></h3><div class="role">Abba Home Here &amp; Now</div></div></div>
+  <h4><span class="ko-only">소개</span><span class="en-only">Summary</span></h4>
+      <p class="ko-only">남동현 목사는 아시아와 북미, 유럽을 아우르며 30년 넘게 사역해 온 목회자이자 타문화권 선교 전략가입니다. 성경 연구와 목회자 양성, 신학교육, 디아스포라 사역에 꾸준히 힘써 왔습니다.</p><p class="en-only">Rev. Dong-hyun Nam is a pastor and cross-cultural mission strategist with more than 30 years of ministry across Asia, North America and Europe. His work has centered on Bible study, pastoral formation, theological education and diaspora ministry.</p>
+      <p class="ko-only">미국 애즈베리신학교(Asbury Theological Seminary)의 Beeson Pastor Program에서 전액 장학생으로 목회학박사 학위를 받았고, 성서학과 목회상담 분야에서 전문 훈련을 받았습니다. 학문적 신학과 실제 목회 현장을 잇는 교육과 사역에 강점을 지니고 있으며, 2024년에는 그간의 사역과 전문성을 인정받아 인도 Chilchil Global University에서 명예철학박사 학위를 받았습니다.</p><p class="en-only">He earned his Doctor of Ministry as a full scholar of the Beeson Pastor Program at Asbury Theological Seminary, with specialized training in biblical studies and pastoral counseling. He is known for bridging academic theology and everyday pastoral practice, and in 2024 he was awarded an honorary Doctor of Philosophy by Chilchil Global University, India, in recognition of his ministry.</p>
+      <p class="ko-only">사역의 중심은 제자훈련, 귀납적 성경교육, 타문화 이해, 선교적 교회론과 선교적 리더십 훈련입니다. 특히 디아스포라와 소외된 공동체를 섬기며 현지·민족 공동체 안에서 지도자를 세우고, 다문화 교회를 일구며, 다양한 문화 속에서 복음을 전할 수 있는 선교 전략과 훈련 프로그램을 개발해 왔습니다.</p><p class="en-only">His ministry focuses on discipleship, inductive Bible teaching, cross-cultural competence, missional ecclesiology and missional leadership training. Serving diaspora and marginalized communities, he raises up leaders within local and ethnic communities, plants multicultural churches, and develops mission strategies and training programs for sharing the gospel across cultures.</p>
+      <p class="ko-only">한국어와 영어로 설교와 교육, 상담, 리더십 훈련을 이끌며, 성경적 신실함과 문화적 감수성, 선교적 용기를 갖춘 제자를 세우는 일에 헌신하고 있습니다.</p><p class="en-only">Ministering in both Korean and English through preaching, teaching, counseling and leadership training, he is devoted to forming disciples marked by biblical faithfulness, cultural sensitivity and missional courage.</p>
+  <h4><span class="ko-only">학력</span><span class="en-only">Education</span></h4>
+  <ul class="pd-edu">
+        <li><span class="yr">2024</span><div><b><span class="ko-only">명예철학박사 · </span>Honorary Doctor of Philosophy (Ph.D. h.c.)</b><span class="sch"><span class="ko-only">Chilchil Global University · 인도</span><span class="en-only">Chilchil Global University · India</span></span><span class="note"><span class="ko-only">2024년 수여</span><span class="en-only">Conferred 2024</span></span></div></li>
+        <li><span class="yr">2019</span><div><b><span class="ko-only">목회학박사 · </span>Doctor of Ministry (D.Min.)</b><span class="sch"><span class="ko-only">Asbury Theological Seminary · 미국 켄터키주 윌모어</span><span class="en-only">Asbury Theological Seminary · Wilmore, Kentucky, USA</span></span><span class="note"><span class="ko-only">Beeson Pastor Program 전액 장학생 · 우등 졸업 · 2019년</span><span class="en-only">Beeson Pastor Program full scholar · Graduated with honors, 2019</span></span></div></li>
+        <li><span class="yr">2004</span><div><b><span class="ko-only">성서학석사 · </span>Master of Arts in Biblical Studies (M.A.B.S.)</b><span class="sch"><span class="ko-only">Asbury Theological Seminary · 미국 켄터키주 윌모어</span><span class="en-only">Asbury Theological Seminary · Wilmore, Kentucky, USA</span></span><span class="note"><span class="ko-only">귀납적 성경연구와 주해 방법론 전공 · 2004년 졸업</span><span class="en-only">Inductive Bible Study & Exegetical Method · 2004</span></span></div></li>
+        <li><span class="yr">1996</span><div><b><span class="ko-only">목회학석사 · </span>Master of Divinity (M.Div.)</b><span class="sch"><span class="ko-only">서울신학대학교 · 부천</span><span class="en-only">Seoul Theological University · Bucheon, Korea</span></span><span class="note"><span class="ko-only">목회상담 및 실천신학 집중 과정 · 1996년 졸업</span><span class="en-only">Emphasis in Pastoral Counseling & Practical Theology · 1996</span></span></div></li>
+        <li><span class="yr">1992</span><div><b><span class="ko-only">영어영문학 학사 · </span>B.A. in English Language & Literature</b><span class="sch"><span class="ko-only">한남대학교 · 대전</span><span class="en-only">Hannam University · Daejeon, Korea</span></span><span class="note"><span class="ko-only">우등 졸업 · 1992년</span><span class="en-only">Graduated with honors, 1992</span></span></div></li>
+  </ul>
+</dialog>
+<style>
+.lead-hl{list-style:none;padding:0;margin:26px 0 0;display:flex;gap:12px;flex-wrap:wrap}
+.lead-hl li{border:1px solid var(--line);border-radius:14px;padding:12px 16px;min-width:150px;background:#fff}
+.lead-hl b{display:block;font-family:var(--en);font-size:22px;font-weight:500;color:var(--rust);line-height:1.1}
+.lead-hl span{font-size:12.5px;color:var(--muted)}
+.profile-dlg{margin:auto;inset:0;max-width:720px;width:calc(100% - 32px);max-height:88vh;border:0;border-radius:20px;padding:36px 34px;background:var(--bg,#faf7f2);color:var(--ink);overflow:auto}
+.profile-dlg::backdrop{background:rgba(20,14,11,.55)}
+.pd-close{position:sticky;float:right;top:0;border:0;background:#fff;width:38px;height:38px;border-radius:50%;font-size:24px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.pd-head{display:flex;gap:18px;align-items:center;margin-bottom:24px}
+.pd-ph{width:84px;height:84px;border-radius:50%;background-size:cover;background-position:center 25%;flex:none}
+.pd-head h3{font-family:var(--serif);font-size:26px;margin:6px 0 2px}
+.pd-head .role{font-size:13px;color:var(--muted)}
+.profile-dlg h4{font-family:var(--serif);font-size:18px;margin:26px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.profile-dlg p{font-size:15px;line-height:1.85;color:var(--ink-2);margin:0 0 12px}
+.pd-edu{list-style:none;padding:0;margin:0;display:grid;gap:16px}
+.pd-edu li{display:flex;gap:16px}
+.pd-edu .yr{flex:none;width:44px;font-family:var(--en);color:var(--rust);font-weight:600;padding-top:1px}
+.pd-edu b{display:block;font-weight:600;font-size:15px}
+.pd-edu .sch{display:block;font-size:14px;color:var(--ink-2);margin-top:2px}
+.pd-edu .note{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+@media (max-width:600px){.profile-dlg{padding:26px 20px}.lead-hl li{min-width:0;flex:1 1 140px}}
+</style>
+<script>
+(function(){const d=document.getElementById("profile"),b=document.getElementById("open-profile");if(!d||!b)return;
+b.onclick=()=>{d.showModal?d.showModal():d.setAttribute("open","");document.body.style.overflow="hidden";};
+const close=()=>{d.close?d.close():d.removeAttribute("open");};
+d.addEventListener("close",()=>document.body.style.overflow="");
+d.querySelector(".pd-close").onclick=close;
+d.addEventListener("click",e=>{if(e.target===d)close();});})();
+</script>
 <script src="data.js"></script>
 <script src="i18n.js"></script>
 <script src="main.js"></script>
