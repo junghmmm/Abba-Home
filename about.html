@@ -61,6 +61,25 @@
   </div>
 </section>
 
+<style>
+.val{display:flex;flex-direction:column}
+.val-more{margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
+.val-more summary{cursor:pointer;list-style:none;font-size:14px;color:var(--rust);font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.val-more summary::-webkit-details-marker{display:none}
+.val-more summary::after{content:"+";font-size:18px;line-height:1;transition:transform .2s}
+.val-more[open] summary::after{transform:rotate(45deg)}
+.vm-body{margin-top:14px}
+.vm-tag{font-family:var(--serif);font-size:18px;font-weight:600;margin-bottom:8px}
+.vm-tag small{display:block;font-family:inherit;font-size:12px;font-weight:500;color:var(--muted);letter-spacing:.04em;margin-top:2px}
+.val .vm-body p{font-size:14.5px;line-height:1.75;margin-bottom:14px}
+.vm-list{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.vm-list li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.5}
+.vm-list .n{flex:none;width:22px;height:22px;border-radius:50%;background:var(--rust);color:#fff;font-size:12px;display:grid;place-items:center;margin-top:1px}
+.vm-list b{display:block;font-weight:600}
+.vm-list em{display:block;font-style:normal;font-size:13px;color:var(--muted)}
+html:not([lang="ko"]) .ko-only{display:none}
+html[lang="ko"] .en-only{display:none}
+</style>
 <section class="values">
   <div class="wrap">
     <div class="sec-head" style="justify-content:center;text-align:center"><div><span class="eyebrow">Core Values</span><h2 data-i18n="about.val.h2">핵심가치</h2></div></div>
@@ -69,9 +88,21 @@
       <cite data-i18n="about.mark.cite">마가복음 3:13–15 · MARK 3:13–15</cite>
     </div>
     <div class="val-grid">
-      <div class="val reveal"><div class="en">Call</div><h3 data-i18n="val.call">부르심</h3><p data-i18n="about.v1p">주님이 원하시는 자들을 부르십니다. 우리는 그 부르심에 응답하여, 길 잃은 이들을 아버지의 집으로 초대합니다.</p></div>
-      <div class="val reveal"><div class="en">Abide</div><h3 data-i18n="val.abide">함께 있음</h3><p data-i18n="about.v2p">보내심 이전에 함께 있음이 있습니다. 말씀과 예배, 식탁의 교제 안에서 주님과 그리고 서로와 함께 머뭅니다.</p></div>
-      <div class="val reveal"><div class="en">Go</div><h3 data-i18n="val.go">나아감</h3><p data-i18n="about.v3p">함께 있던 자들을 주님이 보내십니다. 우리는 삶의 자리와 열방으로 보냄 받은 자로 살아갑니다.</p></div>
+      <div class="val reveal"><div class="en">Call</div><h3 data-i18n="val.call">부르심</h3><p data-i18n="about.v1p">주님이 원하시는 자들을 부르십니다. 우리는 그 부르심에 응답하여, 길 잃은 이들을 아버지의 집으로 초대합니다.</p>
+        <details class="val-more"><summary><span class="ko-only">자세히 보기</span><span class="en-only">Learn more</span></summary>
+        <div class="vm-body"><div class="vm-tag">사랑 | Love <small><span class="ko-only">기초 가치 · </span>Fundamental Value</small></div>
+        <p class="ko-only">주님의 부르심의 토대는 사랑입니다. 주님은 우리를 사랑과 긍휼로 맞아 주시고 공감하시며, 있는 모습 그대로 받아 주시고 환대하십니다. 그 사랑 안에서 잃어버렸던 정체성과 자존감이 회복되는 전인적인 치유가 일어납니다.</p><p class="en-only">The foundation of the Lord’s calling is love. He welcomes us with compassion and empathy, accepts and embraces us just as we are, and in that love brings whole-person healing as our identity and self-worth are restored.</p>
+        <ol class="vm-list"><li><span class="n">1</span><span><b>은혜로운 긍휼과 공감</b><em>Gracious Compassion & Empathy</em></span></li><li><span class="n">2</span><span><b>무조건적인 수용과 환대</b><em>Unconditional Acceptance & Hospitality</em></span></li><li><span class="n">3</span><span><b>왕 같은 정체성과 자존감</b><em>Royal Identity & Self-esteem</em></span></li></ol></div></details></div>
+      <div class="val reveal"><div class="en">Abide</div><h3 data-i18n="val.abide">함께 있음</h3><p data-i18n="about.v2p">보내심 이전에 함께 있음이 있습니다. 말씀과 예배, 식탁의 교제 안에서 주님과 그리고 서로와 함께 머뭅니다.</p>
+        <details class="val-more"><summary><span class="ko-only">자세히 보기</span><span class="en-only">Learn more</span></summary>
+        <div class="vm-body"><div class="vm-tag">임재 | Presence <small><span class="ko-only">형성 가치 · </span>Formational Value</small></div>
+        <p class="ko-only">함께 있음은 그리스도 안에 거하는 것입니다. 우리는 끊임없이 영과 진리로 예배하며 주님의 임재 안에 머뭅니다. 함께 거하는 가운데 각자의 은사와 부르심이 드러나고, 서로 다른 배경의 사람들이 조화롭게 하나 됩니다.</p><p class="en-only">To abide is to dwell in Christ. Through unceasing worship in spirit and truth we live in His presence; as we abide together, gifts and callings come to light, and people of many backgrounds grow into one harmonious body.</p>
+        <ol class="vm-list"><li><span class="n">1</span><span><b>끊임없는 영과 진리의 예배</b><em>Unceasing Worship in Spirit & Truth</em></span></li><li><span class="n">2</span><span><b>검증된 은사와 부르심</b><em>Approved Gifting & Calling</em></span></li><li><span class="n">3</span><span><b>다양성 가운데 조화로운 연합</b><em>Harmonious Unity in Diversity</em></span></li></ol></div></details></div>
+      <div class="val reveal"><div class="en">Go</div><h3 data-i18n="val.go">나아감</h3><p data-i18n="about.v3p">함께 있던 자들을 주님이 보내십니다. 우리는 삶의 자리와 열방으로 보냄 받은 자로 살아갑니다.</p>
+        <details class="val-more"><summary><span class="ko-only">자세히 보기</span><span class="en-only">Learn more</span></summary>
+        <div class="vm-body"><div class="vm-tag">파송 | Commission <small><span class="ko-only">사명 가치 · </span>Empowering Value</small></div>
+        <p class="ko-only">주님은 함께 거하던 이들을 세상으로 보내십니다. 보냄 받은 이들은 균형 잡힌 리더십과 팔로워십을 갖추고, 가는 곳마다 다른 문화를 세심하게 이해하며 품습니다. 그리고 사역의 자리에서 돌아와 아바홈에서 다시 쉼을 얻고 새 힘을 공급받습니다.</p><p class="en-only">The Lord sends out those who have abided with Him. Those who are sent grow in balanced leadership and followership, serve with sensitivity and openness toward every culture they meet, and return to Abba Home to rest and be renewed.</p>
+        <ol class="vm-list"><li><span class="n">1</span><span><b>균형 잡힌 리더십과 팔로워십</b><em>Balanced Leadership & Followership</em></span></li><li><span class="n">2</span><span><b>다문화에 대한 민감성과 포용성</b><em>Keen Sensitivity & Inclusivity toward Diverse Cultures</em></span></li><li><span class="n">3</span><span><b>때에 맞는 안식과 재충전</b><em>Timely Rest & Renewal</em></span></li></ol></div></details></div>
     </div>
   </div>
 </section>
