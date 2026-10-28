@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>오시는길 | 아바홈히어랜나우</title>
+<meta name="description" content="아바홈히어랜나우 오시는길. 경기도 안산시 상록구 석호로 229-1 2층. 수인분당선 사리역에서 걸어서 9분, 한대앞역·상록수역에서 버스로 오실 수 있어요.">
+<link rel="canonical" href="https://www.abbahome.co.kr/directions">
+<meta name="keywords" content="아바홈 오시는길, 아바홈히어랜나우 위치, 안산 석호로 229-1, 사리역, 한대앞역, 상록수역, 시곡중학교 정류장, 아바홈, 아바홈히어랜나우">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="아바홈히어랜나우">
+<meta property="og:url" content="https://www.abbahome.co.kr/directions">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="오시는길 | 아바홈히어랜나우">
+<meta property="og:description" content="경기도 안산시 상록구 석호로 229-1 2층 · 사리역 도보 9분">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@500;600&family=Noto+Sans+Sinhala:wght@400;500;600&family=Noto+Serif+Sinhala:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.dir-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:40px;align-items:stretch}
+.dir-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;display:flex;flex-direction:column;gap:18px}
+.dir-card .lbl{font-size:12px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.dir-addr{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:600}
+.dir-addr small{display:block;font-family:var(--sans);font-size:14px;font-weight:400;color:var(--muted);margin-top:4px}
+.dir-addr-row{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.dir-time{border-top:1px solid var(--line);padding-top:16px;font-size:15px;color:var(--ink-2)}
+.dir-time b{color:var(--ink);font-weight:600}
+.map-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+.map-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:99px;font-size:15px;font-weight:500;border:1px solid var(--line);color:var(--ink);background:#fff;transition:.2s}
+.map-btn:hover{border-color:var(--ink)}
+.map-btn.naver{background:#03c75a;border-color:#03c75a;color:#fff}
+.map-btn.naver:hover{background:#02a94c;border-color:#02a94c}
+.map-btn .n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:4px;background:#fff;color:#03c75a;font-weight:800;font-size:13px;font-family:Arial,sans-serif}
+.dir-map{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);min-height:340px;background:var(--paper)}
+.dir-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.routes{display:grid;gap:22px}
+.route{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 30px}
+.route-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.route-h h3{font-family:var(--serif);font-size:23px;font-weight:600}
+.line{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;padding:0 9px;border-radius:99px;font-size:12.5px;font-weight:600;color:#fff;white-space:nowrap}
+.line.sb{background:#f5a200}
+.line.l4{background:#00a5de}
+.best{font-size:12.5px;font-weight:600;color:var(--rust);background:#fbeee6;border-radius:99px;padding:4px 11px}
+.opts{display:grid;gap:14px}
+.opt{display:grid;grid-template-columns:86px minmax(0,1fr);gap:16px;align-items:start;padding-top:14px;border-top:1px dashed var(--line)}
+.opt:first-child{border-top:0;padding-top:0}
+.opt .mode{font-size:13px;font-weight:600;color:var(--muted);padding-top:3px}
+.opt .mode b small{font-family:var(--sans);font-size:13px;font-weight:500;margin-left:2px;color:var(--muted)}
+.opt .mode b{display:block;font-family:var(--en);font-size:22px;font-weight:500;color:var(--ink);line-height:1.1;margin-top:2px;font-variant-numeric:tabular-nums}
+.steps{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:6px 4px;font-size:15px;line-height:1.6}
+.steps li{display:inline-flex;align-items:center;gap:6px}
+.steps li+li::before{content:"→";color:var(--muted);margin:0 4px}
+.bus{display:inline-flex;gap:4px;flex-wrap:wrap}
+.bus span{font-family:var(--en);font-weight:600;font-size:14px;padding:1px 9px;border-radius:6px;background:#e7f3ea;color:#1f6b35;font-variant-numeric:tabular-nums}
+.stop{font-weight:600}
+.stop.off{color:var(--rust)}
+.opt p.sub{font-size:13.5px;color:var(--muted);margin-top:4px}
+.dir-note{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between;align-items:center;margin-top:30px;padding:20px 24px;border-radius:var(--radius);background:var(--paper);border:1px solid var(--line);font-size:14.5px;color:var(--ink-2)}
+.dir-note a{font-weight:600;color:var(--ink);white-space:nowrap}
+.getoff{display:flex;gap:14px;align-items:center;margin-bottom:28px;padding:18px 22px;border-radius:var(--radius);background:var(--dusk);color:#f3e9de}
+.getoff .pin{display:grid;place-items:center;flex:0 0 38px;height:38px;border-radius:50%;background:var(--rust);color:#fff;font-size:18px}
+.getoff b{font-family:var(--serif);font-size:19px;font-weight:600}
+.getoff span{display:block;font-size:13.5px;opacity:.8}
+@media (max-width:860px){.dir-top{grid-template-columns:1fr}.dir-map{min-height:280px}}
+@media (max-width:560px){.dir-card,.route{padding:22px 18px}.opt{grid-template-columns:1fr;gap:6px}.opt .mode b small{font-family:var(--sans);font-size:13px;font-weight:500;margin-left:2px;color:var(--muted)}
+.opt .mode b{display:inline;margin-left:6px;font-size:18px}.dir-addr{font-size:21px}}
+</style>
+</head>
+<body data-page="directions">
+
+<div class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Directions</span>
+    <h1 data-i18n="dir.h1">오시는길</h1>
+    <p data-i18n="dir.p">수인분당선 사리역에서 걸어서 9분이에요. 한대앞역과 상록수역에서는 버스로 오실 수 있어요.</p>
+  </div>
+</div>
+
+<section style="padding-top:60px">
+  <div class="wrap dir-top">
+    <div class="dir-card">
+      <span class="lbl" data-i18n="c.addr">주소</span>
+      <div class="dir-addr-row">
+        <div class="dir-addr"><span data-i18n="addr">경기도 안산시 상록구 석호로 229-1 (2층)</span><small data-i18n="dir.jibun">지번 · 사동 1341-9 · 우편번호 15582</small></div>
+        <button class="copy" data-copy="경기도 안산시 상록구 석호로 229-1 2층">복사</button>
+      </div>
+      <div class="dir-time"><b data-i18n="foot.worship">목요열방예배 · 매주 목 19:30</b><br><span data-i18n="foot.meal">식사 · 18:30부터</span></div>
+      <div class="map-btns">
+        <a class="map-btn naver" target="_blank" rel="noopener" href="https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%83%81%EB%A1%9D%EA%B5%AC%20%EC%84%9D%ED%98%B8%EB%A1%9C%20229-1"><span class="n">N</span><span data-i18n="dir.naver">네이버 지도에서 보기</span></a>
+        <a class="map-btn" target="_blank" rel="noopener" href="https://map.kakao.com/link/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%83%81%EB%A1%9D%EA%B5%AC%20%EC%84%9D%ED%98%B8%EB%A1%9C%20229-1" data-i18n="dir.kakao">카카오맵</a>
+      </div>
+    </div>
+    <div class="dir-map">
+      <iframe title="아바홈히어랜나우 위치 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%83%81%EB%A1%9D%EA%B5%AC%20%EC%84%9D%ED%98%B8%EB%A1%9C%20229-1&z=17&hl=ko&output=embed"></iframe>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:30px"><div><span class="eyebrow">By Subway &amp; Bus</span><h2 data-i18n="dir.h2">대중교통으로 오시는 방법</h2></div></div>
+
+    <div class="getoff">
+      <span class="pin" aria-hidden="true">●</span>
+      <div><b data-i18n="dir.stop">버스는 ‘시곡중학교’ 정류장에서 내리세요</b><span data-i18n="dir.stop.s">정류장에서 아바홈까지 걸어서 약 5분 (230m)</span></div>
+    </div>
+
+    <div class="routes">
+      <article class="route">
+        <div class="route-h"><span class="line sb">수인분당</span><h3 data-i18n="dir.sari.h">사리역에서</h3><span class="best" data-i18n="dir.best">가장 가까워요</span></div>
+        <div class="opts">
+          <div class="opt">
+            <div class="mode"><span data-i18n="dir.walk">도보</span><b>9<small data-i18n="dir.min">분</small></b></div>
+            <div><ul class="steps"><li data-i18n="dir.sari.w1">사리역 2번 출구</li><li data-i18n="dir.sari.w2">걸어서 536m</li><li class="stop off" data-i18n="dir.arrive">아바홈 도착</li></ul></div>
+          </div>
+          <div class="opt">
+            <div class="mode"><span data-i18n="dir.bus">버스</span><b>8<small data-i18n="dir.min">분</small></b></div>
+            <div><ul class="steps"><li data-i18n="dir.sari.b1">사리역2번출구 정류장</li><li class="bus"><span>52</span><span>80B</span><span>301</span></li><li data-i18n="dir.onestop">1정거장</li><li class="stop off" data-i18n="dir.sigok">시곡중학교 하차</li></ul><p class="sub" data-i18n="dir.sari.bs">걸어오는 것과 시간이 비슷해요. 짐이 많거나 비 오는 날 이용하세요.</p></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="route">
+        <div class="route-h"><span class="line l4">4</span><span class="line sb">수인분당</span><h3 data-i18n="dir.hd.h">한대앞역에서</h3></div>
+        <div class="opts">
+          <div class="opt">
+            <div class="mode"><span data-i18n="dir.subway">지하철</span><b>16<small data-i18n="dir.min">분</small></b></div>
+            <div><ul class="steps"><li data-i18n="dir.hd.s1">수인분당선 청량리 방면</li><li data-i18n="dir.onestop">1정거장</li><li class="stop" data-i18n="dir.hd.s2">사리역 하차</li><li data-i18n="dir.hd.s3">2번 출구에서 걸어서 9분</li></ul><p class="sub" data-i18n="dir.hd.ss">가장 빠른 방법이에요.</p></div>
+          </div>
+          <div class="opt">
+            <div class="mode"><span data-i18n="dir.bus">버스</span><b>27<small data-i18n="dir.min">분</small></b></div>
+            <div><ul class="steps"><li data-i18n="dir.hd.b1">한대앞역1번출구 정류장</li><li class="bus"><span>52</span></li><li class="stop off" data-i18n="dir.sigok">시곡중학교 하차</li></ul><p class="sub" data-i18n="dir.hd.bs">환승 없이 한 번에 와요. 같은 정류장에서 80A번도 시곡중학교에 서요(약 32분).</p></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="route">
+        <div class="route-h"><span class="line l4">4</span><h3 data-i18n="dir.sl.h">상록수역에서</h3></div>
+        <div class="opts">
+          <div class="opt">
+            <div class="mode"><span data-i18n="dir.bus">버스</span></div>
+            <div><ul class="steps"><li data-i18n="dir.sl.b1">상록수역2번출구 정류장</li><li class="bus"><span>80A</span></li><li class="stop off" data-i18n="dir.sigok">시곡중학교 하차</li></ul></div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="dir-note">
+      <span data-i18n="dir.note">노선과 소요시간은 2026년 10월 카카오맵 기준이에요. 바뀔 수 있으니 출발 전 지도 앱에서 한 번 더 확인해 주세요.</span>
+      <span><span data-i18n="dir.call">길을 찾기 어려우면 전화 주세요</span> · <a href="tel:01087839253">010-8783-9253</a></span>
+    </div>
+  </div>
+</section>
+
+<script src="data.js"></script>
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

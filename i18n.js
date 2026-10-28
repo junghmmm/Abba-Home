@@ -308,5 +308,66 @@ window.I18N = {
     zh: "发送失败。请稍后再试，或直接发送邮件至 {email}。",
     fr: "L’envoi a échoué. Réessayez plus tard ou écrivez-nous directement à {email}.",
     si: "යැවීම අසාර්ථක විය. පසුව නැවත උත්සාහ කරන්න, නැතහොත් {email} වෙත කෙලින්ම ඊමේල් කරන්න."
-  }
+  },
+
+  /* ---------- 오시는길 ---------- */
+  "nav.directions": { ko: "오시는길", en: "Directions", zh: "交通指南", fr: "Accès", si: "පැමිණෙන මාර්ගය" },
+  "foot.dir": { ko: "오시는길 · 버스 안내 →", en: "Directions & buses →", zh: "交通指南 · 公交 →", fr: "Accès et bus →", si: "පැමිණෙන මාර්ගය · බස් →" },
+  "dir.h1": { ko: "오시는길", en: "Getting here", zh: "交通指南", fr: "Venir chez nous", si: "පැමිණෙන මාර්ගය" },
+  "dir.p": {
+    en: "It’s a 9-minute walk from Sari Station (Suin-Bundang Line). From Hanyang Univ. at Ansan and Sangnoksu stations you can take a bus.",
+    zh: "从水仁·盆唐线沙里站步行9分钟。从汉大前站和常绿树站可乘公交车前来。",
+    fr: "À 9 minutes à pied de la station Sari (ligne Suin-Bundang). Depuis les stations Hanyang Univ. at Ansan et Sangnoksu, vous pouvez prendre le bus.",
+    si: "සුයින්-බුන්ඩං මාර්ගයේ සාරි (사리) ස්ථානයේ සිට පයින් මිනිත්තු 9යි. හන්දේආප් (한대앞) සහ සංනොක්සු (상록수) ස්ථානවල සිට බස් රථයෙන් පැමිණිය හැක."
+  },
+  "dir.jibun": { en: "Lot no. Sa-dong 1341-9 · Postal code 15582", zh: "地号 沙洞 1341-9 · 邮编 15582", fr: "Parcelle Sa-dong 1341-9 · Code postal 15582", si: "ඉඩම් අංකය Sa-dong 1341-9 · තැපැල් කේතය 15582" },
+  "dir.naver": { en: "Open in Naver Map", zh: "在 Naver 地图中查看", fr: "Ouvrir dans Naver Map", si: "Naver සිතියමේ විවෘත කරන්න" },
+  "dir.kakao": { en: "Kakao Map", zh: "Kakao 地图", fr: "Kakao Map", si: "Kakao සිතියම" },
+  "dir.h2": { ko: "대중교통으로 오시는 방법", en: "By subway and bus", zh: "乘坐公共交通", fr: "En métro et en bus", si: "දුම්රිය සහ බස් රථයෙන්" },
+  "dir.stop": {
+    en: "Get off the bus at the ‘Sigok Middle School (시곡중학교)’ stop",
+    zh: "公交请在“始谷中学(시곡중학교)”站下车",
+    fr: "Descendez du bus à l’arrêt « Sigok Middle School (시곡중학교) »",
+    si: "බසයෙන් ‘සිගොක් මධ්‍ය විද්‍යාලය (시곡중학교)’ නැවතුමෙන් බසින්න"
+  },
+  "dir.stop.s": { en: "About a 5-minute walk (230 m) from the stop", zh: "从车站步行约5分钟(230米)", fr: "Environ 5 minutes à pied (230 m) depuis l’arrêt", si: "නැවතුමේ සිට පයින් මිනිත්තු 5ක් පමණ (මීටර් 230)" },
+  "dir.sari.h": { en: "From Sari Station", zh: "从沙里站", fr: "Depuis la station Sari", si: "සාරි (사리) ස්ථානයේ සිට" },
+  "dir.best": { en: "Closest", zh: "最近", fr: "Le plus proche", si: "ආසන්නතම" },
+  "dir.walk": { en: "Walk", zh: "步行", fr: "À pied", si: "පයින්" },
+  "dir.bus": { en: "Bus", zh: "公交", fr: "Bus", si: "බස්" },
+  "dir.subway": { en: "Subway", zh: "地铁", fr: "Métro", si: "දුම්රිය" },
+  "dir.min": { en: "min", zh: "分钟", fr: "min", si: "මි." },
+  "dir.sari.w1": { en: "Sari Station Exit 2", zh: "沙里站2号出口", fr: "Station Sari, sortie 2", si: "සාරි ස්ථානය පිටවීම 2" },
+  "dir.sari.w2": { en: "Walk 536 m", zh: "步行536米", fr: "536 m à pied", si: "මීටර් 536ක් ඇවිදින්න" },
+  "dir.arrive": { en: "Abba Home", zh: "到达 Abba Home", fr: "Abba Home", si: "Abba Home වෙත" },
+  "dir.sari.b1": { en: "Sari Stn. Exit 2 bus stop", zh: "沙里站2号出口 公交站", fr: "Arrêt Sari Stn. sortie 2", si: "සාරි ස්ථාන පිටවීම 2 බස් නැවතුම" },
+  "dir.onestop": { en: "1 stop", zh: "1站", fr: "1 arrêt", si: "නැවතුම් 1" },
+  "dir.sigok": { en: "Get off at Sigok Middle School", zh: "始谷中学站下车", fr: "Descendre à Sigok Middle School", si: "සිගොක් මධ්‍ය විද්‍යාලයේ බසින්න" },
+  "dir.sari.bs": {
+    en: "About as quick as walking. Handy with luggage or on rainy days.",
+    zh: "与步行时间差不多，行李多或下雨时可乘坐。",
+    fr: "Aussi rapide qu’à pied. Pratique avec des bagages ou par temps de pluie.",
+    si: "ඇවිදීමට සමාන කාලයක් ගතවේ. බඩු වැඩි නම් හෝ වැසි දිනවල භාවිතා කරන්න."
+  },
+  "dir.hd.h": { en: "From Hanyang Univ. at Ansan Station", zh: "从汉大前站", fr: "Depuis la station Hanyang Univ. at Ansan", si: "හන්දේආප් (한대앞) ස්ථානයේ සිට" },
+  "dir.hd.s1": { en: "Suin-Bundang Line toward Cheongnyangni", zh: "水仁·盆唐线 往清凉里方向", fr: "Ligne Suin-Bundang direction Cheongnyangni", si: "සුයින්-බුන්ඩං මාර්ගය චොංන්යාංනි දිශාවට" },
+  "dir.hd.s2": { en: "Get off at Sari", zh: "沙里站下车", fr: "Descendre à Sari", si: "සාරි හි බසින්න" },
+  "dir.hd.s3": { en: "Exit 2, then a 9-minute walk", zh: "2号出口步行9分钟", fr: "Sortie 2, puis 9 min à pied", si: "පිටවීම 2 සිට පයින් මිනිත්තු 9" },
+  "dir.hd.ss": { en: "The fastest way.", zh: "最快的方法。", fr: "Le plus rapide.", si: "වේගවත්ම මාර්ගය." },
+  "dir.hd.b1": { en: "Hanyang Univ. at Ansan Stn. Exit 1 bus stop", zh: "汉大前站1号出口 公交站", fr: "Arrêt Hanyang Univ. at Ansan Stn. sortie 1", si: "හන්දේආප් ස්ථාන පිටවීම 1 බස් නැවතුම" },
+  "dir.hd.bs": {
+    en: "No transfer needed. Bus 80A from the same stop also stops at Sigok Middle School (about 32 min).",
+    zh: "无需换乘。同一车站的80A路也停靠始谷中学站(约32分钟)。",
+    fr: "Sans correspondance. Le bus 80A, au même arrêt, dessert aussi Sigok Middle School (env. 32 min).",
+    si: "මාරුවීමක් අවශ්‍ය නැත. එම නැවතුමේ සිට 80A බසයද සිගොක් මධ්‍ය විද්‍යාලයේ නවතී (මිනිත්තු 32ක් පමණ)."
+  },
+  "dir.sl.h": { en: "From Sangnoksu Station", zh: "从常绿树站", fr: "Depuis la station Sangnoksu", si: "සංනොක්සු (상록수) ස්ථානයේ සිට" },
+  "dir.sl.b1": { en: "Sangnoksu Stn. Exit 2 bus stop", zh: "常绿树站2号出口 公交站", fr: "Arrêt Sangnoksu Stn. sortie 2", si: "සංනොක්සු ස්ථාන පිටවීම 2 බස් නැවතුම" },
+  "dir.note": {
+    en: "Routes and times are based on Kakao Map as of October 2026 and may change. Please check a map app before you leave.",
+    zh: "路线和时间以2026年10月Kakao地图为准，可能有变动。出发前请再在地图应用中确认。",
+    fr: "Itinéraires et durées selon Kakao Map (octobre 2026), susceptibles de changer. Vérifiez dans une application de cartes avant de partir.",
+    si: "මාර්ග සහ කාලය 2026 ඔක්තෝබර් Kakao සිතියම අනුවයි, වෙනස් විය හැක. පිටත්වීමට පෙර සිතියම් යෙදුමෙන් පරීක්ෂා කරන්න."
+  },
+  "dir.call": { en: "Lost? Give us a call", zh: "找不到路请致电", fr: "Perdu ? Appelez-nous", si: "මාර්ගය සොයාගත නොහැකි නම් අමතන්න" }
 };

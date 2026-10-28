@@ -367,3 +367,8 @@ html:lang(fr) .hero h1,html:lang(en) .hero h1{font-size:clamp(38px,6.2vw,84px)}
 .nation{display:inline-flex;align-items:center;gap:7px;padding:6px 13px 6px 10px;border:1px solid rgba(60,40,30,.14);border-radius:99px;background:rgba(255,255,255,.6);font-size:13.5px;font-weight:500;line-height:1.3}
 .nation .flag{font-size:17px;line-height:1}
 @media (max-width:760px){.nations{gap:6px}.nation{font-size:12.5px;padding:5px 11px 5px 8px}.nation .flag{font-size:15px}}
+
+.foot-map{text-decoration:underline;text-decoration-color:rgba(243,233,222,.35);text-underline-offset:3px}
+.foot-map:hover{text-decoration-color:#f3e9de}
+.foot-dir{display:inline-block;margin-top:4px;color:#f3e9de;font-weight:500;border-bottom:1px solid rgba(243,233,222,.5);padding-bottom:1px}
+.foot-dir:hover{color:#fff;border-color:#fff}

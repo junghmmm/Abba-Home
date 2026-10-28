@@ -108,9 +108,10 @@
         <div>
           <h5>VISIT</h5>
           <ul>
-            <li>${esc(t("addr"))}</li>
+            <li><a class="foot-map" href="https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%83%81%EB%A1%9D%EA%B5%AC%20%EC%84%9D%ED%98%B8%EB%A1%9C%20229-1" target="_blank" rel="noopener">${esc(t("addr"))}</a></li>
             <li>${esc(t("foot.worship"))}</li>
             <li>${esc(t("foot.meal"))}</li>
+            <li><a class="foot-dir" href="directions.html">${esc(t("foot.dir"))}</a></li>
           </ul>
         </div>
         <div>
