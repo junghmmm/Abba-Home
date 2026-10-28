@@ -9,11 +9,19 @@
   /* ---------- 언어 ---------- */
   const codes = LANGS.map(l => l.code);
   const qs = new URLSearchParams(location.search);
-  const store = { get() { try { return localStorage.getItem("abba-lang"); } catch (e) { return null; } }, set(v) { try { localStorage.setItem("abba-lang", v); } catch (e) {} } };
-  const browser = (navigator.language || "ko").slice(0, 2).toLowerCase();
-  let lang = qs.get("lang") || store.get() || (codes.includes(browser) ? browser : "ko");
-  if (!codes.includes(lang)) lang = "ko";
-  if (qs.get("lang")) store.set(lang);
+  /* 우선순위: ① 주소의 ?lang= (그 페이지에서만) ② 사용자가 언어 메뉴에서 직접 고른 언어
+     ③ 기기(폰·PC) 언어 설정 ④ 지원하지 않는 언어면 영어 */
+  const KEY = "abba-lang-pick";
+  const store = { get() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }, set(v) { try { localStorage.setItem(KEY, v); } catch (e) {} } };
+  try { localStorage.removeItem("abba-lang"); } catch (e) {} /* 예전 방식으로 남아 있던 값 정리 */
+  const deviceLang = () => {
+    const list = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "en"]);
+    for (const l of list) { const c = String(l).slice(0, 2).toLowerCase(); if (codes.includes(c)) return c; }
+    return "en";
+  };
+  const pick = v => (v && codes.includes(v) ? v : null);
+  let lang = pick(qs.get("lang")) || pick(store.get()) || deviceLang();
+  if (!codes.includes(lang)) lang = codes.includes("en") ? "en" : "ko";
   document.documentElement.lang = lang;
 
   const t = (key, vars) => {
