@@ -98,8 +98,9 @@ Rules:
 - Transliterate other personal names consistently and sensibly in every language.
 Return ONLY a JSON object with exactly these keys: "ko" (Korean), "en" (English), "zh" (Simplified Chinese), "fr" (French), "si" (Sinhala, natural modern Sinhala in Sinhala script).`;
 const MODELS = ["anthropic/claude-sonnet-4.5", "anthropic/claude-sonnet-4", "openai/gpt-4.1-mini", "openai/gpt-4o-mini", "google/gemini-2.5-flash"];
+let OIDC = ""; /* Vercel 함수 요청 헤더로 들어오는 OIDC 토큰 (AI Gateway 인증용) */
 async function aiTranslate(text) {
-  const key = process.env.AI_GATEWAY_API_KEY || process.env.VERCEL_OIDC_TOKEN;
+  const key = process.env.AI_GATEWAY_API_KEY || OIDC || process.env.VERCEL_OIDC_TOKEN;
   if (!key) throw new Error("no AI gateway token");
   const errs = [];
   for (const model of MODELS) {
@@ -139,6 +140,7 @@ async function ensureTr(it, force) {
 }
 
 module.exports = async (req, res) => {
+  OIDC = req.headers["x-vercel-oidc-token"] || OIDC;
   res.setHeader("Cache-Control", "no-store");
   try {
     if (req.method === "GET") {
