@@ -66,6 +66,25 @@ async function translateAll(text) {
   }));
   return { src, tr };
 }
+/* ---------- 새 기도요청 이메일 알림 (FormSubmit, 키 필요 없음) ---------- */
+const NOTIFY_TO = process.env.PRAYER_NOTIFY_EMAIL || "abbahomeherennow@gmail.com";
+async function notify(it) {
+  const ctl = new AbortController(); const tm = setTimeout(() => ctl.abort(), 8000);
+  try {
+    await fetch("https://formsubmit.co/ajax/" + encodeURIComponent(NOTIFY_TO), {
+      method: "POST", signal: ctl.signal,
+      headers: { "Content-Type": "application/json", Accept: "application/json", Origin: "https://www.abbahome.co.kr", Referer: "https://www.abbahome.co.kr/prayer" },
+      body: JSON.stringify({
+        _subject: "🙏 새 기도요청이 도착했습니다 - 아바홈",
+        _template: "table", _captcha: "false",
+        "이름": it.name || "(익명)", "연락처": it.contact || "(없음)",
+        "홈페이지 나눔 희망": it.share ? "예 (관리자 승인 후 게시)" : "아니오 (비공개)",
+        "기도제목": it.text, "받은 날짜": it.createdAt,
+        "관리 페이지": "https://www.abbahome.co.kr/prayer (맨 아래 '관리자')"
+      })
+    });
+  } finally { clearTimeout(tm); }
+}
 async function ensureTr(it) {
   if (it.tr && Object.keys(it.tr).length >= 4) return false;
   const { src, tr } = await translateAll(it.text);
@@ -103,6 +122,7 @@ module.exports = async (req, res) => {
         share: !!body.share, approved: false, done: false, prayed: 0
       });
       await writeAll(items.slice(0, MAX_ITEMS), blobs);
+      await notify(items[0]).catch(() => {});
       return res.status(200).json({ ok: true });
     }
     if (action === "pray") {
