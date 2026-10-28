@@ -30,9 +30,9 @@ const same = (a, b) => {
   return x.length === y.length && crypto.timingSafeEqual(x, y);
 };
 const clean = (s, n) => String(s || "").replace(/\s+$/g, "").trim().slice(0, n);
-const pub = it => ({ id: it.id, text: it.text, src: it.src, tr: it.tr || null, date: it.date, prayed: it.prayed || 0 });
+const pub = it => ({ id: it.id, text: it.ai ? "" : it.text, src: it.src, ai: !!it.ai, tr: it.tr || null, date: it.date, prayed: it.prayed || 0 });
 
-/* ---------- 자동 번역 (MyMemory 무료 번역, 키 필요 없음) ----------
+/* ---------- 기본 번역 (AI 번역이 안 될 때 쓰는 MyMemory 무료 번역) ----------
    공개 승인된 기도제목을 홈페이지 언어(ko·en·zh·fr·si)로 한 번 번역해 저장해 둡니다. */
 const LANGS = { ko: "ko-KR", en: "en-GB", zh: "zh-CN", fr: "fr-FR", si: "si-LK" };
 const detect = t => /[\uac00-\ud7a3]/.test(t) ? "ko" : "en";
@@ -85,11 +85,57 @@ async function notify(it) {
     });
   } finally { clearTimeout(tm); }
 }
-async function ensureTr(it) {
-  if (it.tr && Object.keys(it.tr).length >= 4) return false;
-  const { src, tr } = await translateAll(it.text);
-  it.src = src; it.tr = { ...(it.tr || {}), ...tr }; it.trAt = Date.now();
-  return Object.keys(tr).length > 0;
+/* ---------- AI 번역 (Vercel AI Gateway) ----------
+   맥락을 읽고, 공동체가 함께 기도하도록 3인칭 기도제목으로 다듬어 5개 언어로 만듭니다. */
+const GLOSSARY = "아바홈 / 아바홈히어랜나우 = Abba Home / Abba Home Here & Now (never 'Avahome' or 'Ava Home'); 그레비 = Grevi (never 'Gravy'); 남동현 목사 = Rev. Dong-hyun Nam; 목요열방예배 = Thursday All Nations Worship; 안산 = Ansan.";
+const SYS = `You prepare prayer requests for the public prayer wall of Abba Home (아바홈), a multicultural Christian mission community in Ansan, Korea, where people from many nations worship together.
+Read the submitted request carefully and understand its full context and emotion. Then write it as a prayer item shared BY THE COMMUNITY ABOUT the person — third person, as if a fellow member is asking everyone to pray (e.g. Korean "…을 위해 함께 기도해 주세요", English "Please pray for …").
+Rules:
+- Keep every fact and need; do not invent, exaggerate or add anything.
+- Warm, respectful, natural church language in each language. Not word-for-word: convey the meaning as a native speaker would write it.
+- Leave out phone numbers, emails, addresses or other identifying contact details.
+- Proper nouns / glossary (always follow): ${GLOSSARY}
+- Transliterate other personal names consistently and sensibly in every language.
+Return ONLY a JSON object with exactly these keys: "ko" (Korean), "en" (English), "zh" (Simplified Chinese), "fr" (French), "si" (Sinhala, natural modern Sinhala in Sinhala script).`;
+const MODELS = ["anthropic/claude-sonnet-4.5", "anthropic/claude-sonnet-4", "openai/gpt-4.1-mini", "openai/gpt-4o-mini", "google/gemini-2.5-flash"];
+async function aiTranslate(text) {
+  const key = process.env.AI_GATEWAY_API_KEY || process.env.VERCEL_OIDC_TOKEN;
+  if (!key) throw new Error("no AI gateway token");
+  const errs = [];
+  for (const model of MODELS) {
+    const ctl = new AbortController(); const tm = setTimeout(() => ctl.abort(), 40000);
+    try {
+      const r = await fetch("https://ai-gateway.vercel.sh/v1/chat/completions", {
+        method: "POST", signal: ctl.signal,
+        headers: { "Content-Type": "application/json", Authorization: "Bearer " + key },
+        body: JSON.stringify({ model, temperature: 0.3, max_tokens: 3000, messages: [{ role: "system", content: SYS }, { role: "user", content: text }] })
+      });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) { errs.push(model + ": " + r.status + " " + JSON.stringify(j.error || j).slice(0, 160)); continue; }
+      const out = String(j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content || "");
+      const m = out.match(/\{[\s\S]*\}/);
+      const o = m ? JSON.parse(m[0]) : null;
+      if (o && ["ko", "en", "zh", "fr", "si"].every(k => typeof o[k] === "string" && o[k].trim())) {
+        const tr = {}; for (const k of ["ko", "en", "zh", "fr", "si"]) tr[k] = o[k].trim().slice(0, 3000);
+        return { tr, model };
+      }
+      errs.push(model + ": bad output");
+    } catch (e) { errs.push(model + ": " + (e.name === "AbortError" ? "timeout" : e.message)); }
+    finally { clearTimeout(tm); }
+  }
+  throw new Error(errs.join(" | "));
+}
+async function ensureTr(it, force) {
+  if (!force && it.ai) return false;
+  try {
+    const { tr, model } = await aiTranslate(it.text);
+    it.tr = tr; it.ai = true; it.aiModel = model; it.src = detect(it.text); it.trErr = ""; it.trAt = Date.now();
+    return true;
+  } catch (e) {
+    it.trErr = String(e.message || e).slice(0, 600); it.trAt = Date.now();
+    if (!it.tr || Object.keys(it.tr).length < 4) { const { src, tr } = await translateAll(it.text); it.src = src; it.tr = { ...(it.tr || {}), ...tr }; }
+    return false;
+  }
 }
 
 module.exports = async (req, res) => {
@@ -99,7 +145,7 @@ module.exports = async (req, res) => {
       const { items, blobs } = await readAll();
       const shown = items.filter(i => i.share && i.approved);
       /* 아직 번역이 없는 제목은 1시간에 한 번씩 몇 개만 번역해서 저장 */
-      const todo = shown.filter(i => (!i.tr || Object.keys(i.tr).length < 4) && (!i.trAt || Date.now() - i.trAt > 3600e3)).slice(0, 2);
+      const todo = shown.filter(i => !i.ai && (!i.trAt || Date.now() - i.trAt > 3600e3)).slice(0, 2);
       if (todo.length) {
         let changed = false;
         for (const it of todo) { it.trAt = Date.now(); changed = (await ensureTr(it).catch(() => false)) || changed; }
@@ -148,7 +194,7 @@ module.exports = async (req, res) => {
     }
     if (!it) return res.status(404).json({ error: "notfound" });
     if (action === "approve") { it.approved = !!body.value && it.share; if (it.approved) await ensureTr(it).catch(() => {}); }
-    else if (action === "translate") { it.tr = null; await ensureTr(it).catch(() => {}); }
+    else if (action === "translate") { await ensureTr(it, true).catch(() => {}); }
     else if (action === "done") it.done = !!body.value;
     else return res.status(400).json({ error: "action" });
     await writeAll(items, blobs);
