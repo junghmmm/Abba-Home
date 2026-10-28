@@ -112,7 +112,7 @@ ${POSTS.map(p => `<item>
 fs.writeFileSync(path.join(OUT, "rss.xml"), rss);
 
 /* sitemap.xml */
-const pages = [["", "1.0", "weekly", today], ["about", "0.8", "monthly", today], ["ministries", "0.8", "monthly", today], ["news", "0.9", "weekly", today], ["schedule", "0.6", "weekly", today], ["prayer", "0.6", "weekly", today], ["contact", "0.5", "yearly", today]];
+const pages = [["", "1.0", "weekly", today], ["about", "0.8", "monthly", today], ["ministries", "0.8", "monthly", today], ["news", "0.9", "weekly", today], ["schedule", "0.6", "weekly", today], ["prayer", "0.6", "weekly", today], ["directions", "0.7", "monthly", today], ["contact", "0.5", "yearly", today]];
 const urls = pages.map(([u, pr, f, d]) => ({ loc: `${SITE_URL}/${u}`, pr, f, d }))
   .concat(POSTS.map(p => ({ loc: `${SITE_URL}/news/${p.id}`, pr: "0.7", f: "monthly", d: p.date })));
 fs.writeFileSync(path.join(OUT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
