@@ -44,6 +44,9 @@
 .pray{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 14px;font-size:13px;cursor:pointer;color:var(--ink)}
 .pray:hover{border-color:var(--rust);color:var(--rust)}
 .pray.did{background:#fbeee6;border-color:#f0cdb8;color:var(--rust)}
+.orig{margin:-4px 0 12px;font-size:12.5px;color:var(--muted)}
+.orig summary{cursor:pointer}
+.orig p{margin:6px 0 0;font-size:14px;color:var(--ink-2)}
 .pempty{color:var(--muted);font-size:14px;padding:16px 0}
 .verse{font-family:var(--serif);font-size:17px;color:var(--ink-2);border-left:3px solid var(--rust);padding:4px 0 4px 16px;margin:0 0 26px}
 .verse small{display:block;font-size:12px;color:var(--muted);margin-top:4px;letter-spacing:.08em}
@@ -140,9 +143,16 @@
   const markPrayed = id => { try { localStorage.setItem(PK, JSON.stringify(prayed().concat(id).slice(-300))); } catch (e) {} };
 
   let items = [];
+  const ORIG = { ko: "원문 보기", en: "Show original", zh: "查看原文", fr: "Voir l’original", si: "මුල් පිටපත" }[lang] || "Original";
+  const AUTO = { ko: "자동 번역", en: "Auto-translated", zh: "自动翻译", fr: "Traduction automatique", si: "ස්වයංක්‍රීය පරිවර්තනය" }[lang] || "Auto-translated";
+  function showText(it) {
+    const t = lang !== (it.src || "ko") && it.tr && it.tr[lang];
+    if (!t) return `<p>${esc(it.text)}</p>`;
+    return `<p>${esc(t)}</p><details class="orig"><summary>${esc(AUTO)} · ${esc(ORIG)}</summary><p>${esc(it.text)}</p></details>`;
+  }
   function renderList() {
     const did = prayed();
-    $("list").innerHTML = items.length ? items.map(it => `<li class="pitem"><p>${esc(it.text)}</p><div class="prow"><span>${esc(it.date.replace(/-/g, "."))}</span><button class="pray ${did.includes(it.id) ? "did" : ""}" data-id="${esc(it.id)}">🙏 ${esc(L.pray)} · ${it.prayed || 0}</button></div></li>`).join("")
+    $("list").innerHTML = items.length ? items.map(it => `<li class="pitem">${showText(it)}<div class="prow"><span>${esc(it.date.replace(/-/g, "."))}</span><button class="pray ${did.includes(it.id) ? "did" : ""}" data-id="${esc(it.id)}">🙏 ${esc(L.pray)} · ${it.prayed || 0}</button></div></li>`).join("")
       : `<li class="pempty">${esc(L.empty)}</li>`;
   }
   async function load() { try { items = (await api()).items || []; } catch (e) { items = []; } renderList(); }
