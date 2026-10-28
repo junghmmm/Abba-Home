@@ -55,8 +55,7 @@ async function mm(q, from, to) {
     const j = await r.json();
     const t = j && j.responseData && j.responseData.translatedText;
     if (!t || j.responseStatus != 200 || /MYMEMORY WARNING|QUERY LENGTH LIMIT|INVALID/i.test(t)) throw new Error("mm");
-    /* 싱할라어: 번역기가 빼먹은 결합 문자(ZWJ) 보정 */
-    return to === "si" ? t.replace(/\u0DCA\s+(?=[\u0D80-\u0DFF])/g, "\u0DCA\u200D") : t;
+    return t;
   } finally { clearTimeout(tm); }
 }
 async function translateAll(text) {
