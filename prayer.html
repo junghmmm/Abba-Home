@@ -146,6 +146,11 @@
   const ORIG = { ko: "원문 보기", en: "Show original", zh: "查看原文", fr: "Voir l’original", si: "මුල් පිටපත" }[lang] || "Original";
   const AUTO = { ko: "자동 번역", en: "Auto-translated", zh: "自动翻译", fr: "Traduction automatique", si: "ස්වයංක්‍රීය පරිවර්තනය" }[lang] || "Auto-translated";
   function showText(it) {
+    if (it.ai && it.tr) {
+      const t = it.tr[lang] || it.tr.en || it.tr.ko;
+      if (lang === "ko" || !it.tr.ko) return `<p>${esc(t)}</p>`;
+      return `<p>${esc(t)}</p><details class="orig"><summary>${esc(AUTO)} · ${esc(ORIG)}</summary><p>${esc(it.tr.ko)}</p></details>`;
+    }
     const t = lang !== (it.src || "ko") && it.tr && it.tr[lang];
     if (!t) return `<p>${esc(it.text)}</p>`;
     return `<p>${esc(t)}</p><details class="orig"><summary>${esc(AUTO)} · ${esc(ORIG)}</summary><p>${esc(it.text)}</p></details>`;
@@ -187,7 +192,9 @@
       <p>${esc(it.text)}</p>
       <div class="acts">${it.share ? `<button class="pbtn sm ${it.approved ? "ghost" : ""}" data-a="approve" data-v="${it.approved ? "" : "1"}">${it.approved ? "게시 내리기" : "홈페이지에 게시"}</button>` : ""}
         <button class="pbtn sm ghost" data-a="done" data-v="${it.done ? "" : "1"}">${it.done ? "응답 표시 취소" : "응답됨 / 완료"}</button>
-        <button class="pbtn sm ghost" data-a="delete">삭제</button></div></div>`).join("") : `<p class="pempty">받은 기도제목이 없습니다.</p>`);
+        ${it.approved ? `<button class="pbtn sm ghost" data-a="translate">AI 번역 다시</button>` : ""}
+        <button class="pbtn sm ghost" data-a="delete">삭제</button></div>
+      ${it.approved && it.tr ? `<details class="orig"><summary>홈페이지에 보이는 글${it.ai ? " (AI)" : " (기본 번역)"}${it.trErr ? " · AI 오류" : ""}</summary><p>${esc(it.tr.ko || "")}</p><p>${esc(it.tr.en || "")}</p>${it.trErr ? `<p style="color:#b3261e">${esc(it.trErr)}</p>` : ""}</details>` : ""}</div>`).join("") : `<p class="pempty">받은 기도제목이 없습니다.</p>`);
   }
   async function adminCall(body) {
     try { const j = await api({ ...body, password: getPw() }); all = j.items || all; renderAdmin(); load(); return true; }
